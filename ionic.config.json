@@ -1,0 +1,7 @@
+{
+  "name": "mascter",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
