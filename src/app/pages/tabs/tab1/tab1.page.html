@@ -1,0 +1,33 @@
+<ion-content>
+  <div class="header">
+    <h1>Conoce otras mascotas</h1>
+  </div>
+  <div class="search-cnt"></div>
+  <div class="post-cnts" *ngIf="pets">
+    <div class="pet-data animated bounceInUp" *ngFor="let pet of pets" (click)="goToProfile(pet) ">
+      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
+        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
+      <p>{{pet.name}}</p>
+    </div>
+    <div class="pet-data" *ngFor="let pet of pets" (click)="goToProfile(pet)">
+      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
+        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
+      <p>{{pet.name}}</p>
+    </div>
+    <div class="pet-data" *ngFor="let pet of pets" (click)="goToProfile(pet)">
+      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
+        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
+      <p>{{pet.name}}</p>
+    </div>
+    <div class="pet-data" *ngFor="let pet of pets" (click)="goToProfile(pet)">
+      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
+        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
+      <p>{{pet.name}}</p>
+    </div>
+    <div class="pet-data" *ngFor="let pet of pets" (click)="goToProfile(pet)">
+      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
+        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
+      <p>{{pet.name}}</p>
+    </div>
+  </div>
+</ion-content>

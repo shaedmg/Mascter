@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="header">
+    <img src="../../../assets/icon/Backward arrow.svg" alt="" (click)="goBack()">
+    <h1>Crear publicación</h1>
+  </div>
+  <div class="data-cnt" *ngIf="pet">
+    <div class="pet-data">
+      <img [src]="pet.profileImg || '../../../assets/icon/foto-perfil.png'" alt="">
+      <span>{{pet.name}}</span>
+    </div>
+    <div class="text-cnt">
+      <textarea placeholder="¿Qué quieres publicar?" name="" id="" rows="10" [(ngModel)]="post.text"></textarea>
+    </div>
+    <div class="btn-cnt">
+      <button class="submit-btn" [disabled]="post.text.length == 0" (click)="onCreatePost()">Publicar</button>
+    </div>
+  </div>
+  </ion-content>
+  

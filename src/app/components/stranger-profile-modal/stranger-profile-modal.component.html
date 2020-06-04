@@ -1,0 +1,24 @@
+<ion-content *ngIf="pet">
+  <div class="header">
+    <img src="../../../assets/icon/Backward arrow.svg" alt="" (click)="goBack()">
+    <h1>{{pet.name}}</h1>
+  </div>
+  <div class="photo-cnt">
+    <img [src]="pet.profileImg || '../../../assets/icon/foto-perfil.png'" alt="">
+  </div>
+  <div class="user-data">
+    <div class="data-cnt" *ngIf="pet.genre">
+      <img src="../../../assets/icon/huella.png" alt=""> <label> Género: </label><span>{{pet.genre == "femenine" ? 'Femenino' : 'Masculino'}}</span>
+    </div>
+    <div class="data-cnt" *ngIf="pet.type">
+      <img src="../../../assets/icon/huella.png" alt=""><label> Tipo de mascota: </label><span>{{pet.type}}</span>
+    </div>
+    <div class="data-cnt" *ngIf="pet.age">
+      <img src="../../../assets/icon/huella.png" alt=""><label> Edad: </label><span>{{pet.age}}</span>
+    </div>
+    <div class="data-cnt" *ngIf="pet.contactInfo">
+      <img src="../../../assets/icon/huella.png" alt=""><label> Información de contacto: </label>
+    </div>
+    <p class="contact-info-text">{{pet.contactInfo}}</p>
+  </div>
+</ion-content>

@@ -1,0 +1,80 @@
+ion-content {
+    --padding-bottom: 100px !important;
+    .header{
+        img{
+            position: absolute;
+            top: 43px;
+            left: 37px;
+        }
+        h1 {
+            margin-top: 39px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            text-align: center;
+        }
+
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .photo-cnt {
+            margin-top: 30px;
+            margin-bottom: 40px;
+            img {
+                height: 80px;
+                width: 80px;
+                border-radius: 50%;
+                object-fit: fill;
+            }
+        }
+        .passwords-cnts {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        ion-segment, ion-select{
+            margin-bottom: 15px;
+        }
+        .input-cnt {
+            width: 100%;
+            padding-left: 37px;
+            padding-right: 37px;
+            p {
+                font-size: 15px;
+                font-weight: bold;
+                margin: 0;
+                margin-bottom: 10px;
+            }
+            input {
+                width: 80%;
+                border: 1px solid lightgray;
+                border-bottom: 1px solid lightgray;
+                border-radius: 5px;
+                padding-left: 11px;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+        & > .input-cnt:last-child{
+            margin-bottom: 80px;
+        }
+        .btn-cnt{
+            display: flex;
+            width: 100%;
+            background: transparent;
+            justify-content: center;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            .submit-btn {
+                width: 70%;
+                height: 50px;
+                background-color: black;
+                color: white;
+                border-radius: 25px;
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+<ion-content class="ion-padding">
+  <div class="form-cnt">
+    <div class="title-cnt">
+      <p>Mascter</p>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="input-cnt">
+        <input type="email" placeholder="Email" formControlName="email">
+        <div *ngIf="loginForm.controls['email'].errors && !loginForm.controls['email'].pristine" class="error-msg">
+          <div [hidden]="!loginForm.controls['email'].errors.required">Email necesario</div>
+          <div class="error-msg" [hidden]="!loginForm.controls['email'].errors.email">El email introducido no es válido</div>
+        </div>
+      </div>
+      <div class="input-cnt">
+        <input type="password" placeholder="Password" formControlName="password">
+        <div *ngIf="loginForm.controls['password'].errors && !loginForm.controls['password'].pristine" class="error-msg">
+          <div [hidden]="!loginForm.controls['password'].errors.required">Contraseña requerida</div>
+        </div>
+      </div>
+      
+      <button class="submit-btn" type="submit" value="Log in" [disabled]="loginForm.invalid">Iniciar sesión</button>
+    </form>
+    <p class="bottom-link">Si aun no se ha registrado, <a [routerLink]="['/register']">registrese ya</a></p>
+  </div>
+</ion-content>

@@ -1,0 +1,16 @@
+<ion-content>
+  <div class="header">
+    <h1>Muro</h1>
+    <img src="../../../../assets/icon/Ei-pencil.svg.png" alt="" (click)="goToCreate()">
+  </div>
+  <div class="post-cnts" *ngIf="dataLoaded">
+    <div class="post-cnt" *ngFor="let post of posts">
+      <div class="pet-data">
+        <img [src]="users[post.userId].profileImg || '../../../../assets/icon/foto-perfil.png'" alt="">
+        <p>{{users[post.userId].name}}</p>
+      </div>
+      <p class="post-text">{{post.text}}</p>
+      <span>{{isToday(post.createdDate) ? 'Hoy a las ' + (post.createdDate | date: 'HH:mm') : ( post.createdDate | date: 'HH:mm - dd/MM/yyyy')}}</span>
+    </div>
+  </div>
+</ion-content>

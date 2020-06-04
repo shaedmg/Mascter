@@ -1,0 +1,11 @@
+{
+    "password": "Contraseña",
+    "register": "Regístrate",
+    "email_required": "Introduce un email",
+    "password_required": "Introduce una contraseña",
+    "password_confirmation": "Vuelve a introducir la contraseña",
+    "password_invalid": "La contraseña ha de tener 6 caracteres",
+    "login": "Iniciar sesión",
+    "login_facebook": "Iniciar sesión con Facebook",
+    "login_google": "Iniciar sesión con Google"
+}

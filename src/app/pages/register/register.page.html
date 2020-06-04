@@ -1,0 +1,111 @@
+<ion-content>
+  <div class="header">
+    <img src="../../../assets/icon/Backward arrow.svg" alt="" (click)="goBack()">
+    <h1>Registrate</h1>
+  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <div class="photo-cnt">
+      <img [src]="(imagePreview && imagePreview.dataUrl) ||  '../../../assets/icon/foto-perfil.png' " alt="" (click)="takePhoto()">
+    </div>
+    <div class="input-cnt">
+      <p for="email">Correo</p>
+      <input type="email" placeholder="Email" formControlName="email">
+      <div class="error-msg" *ngIf="emailRepeated">
+        El email ya está en uso.
+      </div>
+      <div *ngIf="registerForm.controls['email'].errors && registerForm.controls['email'].touched" class="error-msg">
+        <div [hidden]="!registerForm.controls['email'].errors.required">Email requerido</div>
+        <div [hidden]="!registerForm.controls['email'].errors.email">El email no es válido</div>
+      </div>
+    </div>
+    <div formGroupName="passwords" class="passwords-cnts">
+      <div class="input-cnt">
+        <p for="password">Contraseña</p>
+        <input type="password" placeholder="Contraseña" formControlName="password">
+        <div *ngIf="registerForm.get('passwords.password').errors && registerForm.get('passwords.password').touched"
+          class="error-msg">
+          <div [hidden]="!registerForm.get('passwords.password').errors.required">Contraseña requerida
+          </div>
+        </div>
+      </div>
+      <div class="input-cnt">
+        <p for="password_confirmation">Repita la contraseña</p>
+        <input type="password" placeholder="Repita la contraseña"
+          formControlName="password_confirmation">
+      </div>
+    </div>
+    <div *ngIf="registerForm.get('passwords').errors && registerForm.get('passwords').touched" class="error-msg">
+      <div [hidden]="!registerForm.get('passwords').errors.invalidMatch">Las contraseñas no coinciden</div>
+    </div>
+    <div class="input-cnt">
+      <p for="name">Nombre</p>
+      <input type="text" placeholder="Nombre de la mascota" formControlName="name">
+      <div *ngIf="registerForm.controls['name'].errors && registerForm.controls['name'].touched"
+        class="error-msg">
+        <div [hidden]="!registerForm.controls['name'].errors.required">Introduzca el nombre de la mascota</div>
+      </div>
+    </div>
+    <div class="input-cnt">
+      <p for="age">Edad</p>
+      <input type="number" placeholder="Edad de la mascota" formControlName="age">
+      <div *ngIf="registerForm.controls['age'].errors && registerForm.controls['age'].touched"
+        class="error-msg">
+        <div [hidden]="!registerForm.controls['age'].errors.required">Introduzca la edad de la mascota</div>
+      </div>
+    </div>
+    <div class="input-cnt">
+      <p for="type">Tipo de mascota</p>
+      <ion-select placeholder="Tipo de mascota" formControlName="type">
+        <ion-select-option value="Burro">Burro</ion-select-option>
+        <ion-select-option value="Caballo">Caballo</ion-select-option>
+        <ion-select-option value="Cabra">Cabra</ion-select-option>
+        <ion-select-option value="Cerdo">Cerdo</ion-select-option>
+        <ion-select-option value="Conejo">Conejo</ion-select-option>
+        <ion-select-option value="Erizo">Erizo</ion-select-option>
+        <ion-select-option value="Gallina">Gallina</ion-select-option>
+        <ion-select-option value="Gallo">Gallo</ion-select-option>
+        <ion-select-option value="Gato">Gato</ion-select-option>
+        <ion-select-option value="Hamster">Hamster</ion-select-option>
+        <ion-select-option value="Pajaro">Pajaro</ion-select-option>
+        <ion-select-option value="Perro">Perro</ion-select-option>
+        <ion-select-option value="Pez">Pez</ion-select-option>
+        <ion-select-option value="Serpiente">Serpiente</ion-select-option>
+        <ion-select-option value="Tortuga">Tortuga</ion-select-option>
+        <ion-select-option value="Toro">Toro</ion-select-option>
+        <ion-select-option value="Vaca">Vaca</ion-select-option>
+        <ion-select-option value="Yegua">Yegua</ion-select-option>
+      </ion-select>
+      <div *ngIf="registerForm.controls['type'].errors && registerForm.controls['type'].touched"
+        class="error-msg">
+        <div [hidden]="!registerForm.controls['type'].errors.required">Tipo de mascota requerido</div>
+      </div>
+    </div>
+    <div class="input-cnt">
+      <p for="genre">Género</p>
+      <ion-segment formControlName="genre">
+        <ion-segment-button value="masculine">
+          Masculino
+        </ion-segment-button>
+        <ion-segment-button value="femenine">
+          Femenino
+        </ion-segment-button>
+      </ion-segment>
+      <div *ngIf="registerForm.controls['genre'].errors && registerForm.controls['genre'].touched"
+        class="error-msg">
+        <div [hidden]="!registerForm.controls['genre'].errors.required">Género de la mascota requerido</div>
+      </div>
+    </div>
+    <div class="input-cnt">
+      <p for="contactInfo">Forma de contacto</p>
+      <input type="text" placeholder="Forma de contacto" formControlName="contactInfo">
+      <div *ngIf="registerForm.controls['contactInfo'].errors && registerForm.controls['contactInfo'].touched"
+        class="error-msg">
+        <div [hidden]="!registerForm.controls['contactInfo'].errors.required">Introduzca una manera de que establezcan contacto con usted</div>
+      </div>
+    </div>
+    <div class="btn-cnt">
+      <button class="submit-btn" type="submit" value="Log in">Registrarse</button>
+    </div>
+  </form>
+
+</ion-content>

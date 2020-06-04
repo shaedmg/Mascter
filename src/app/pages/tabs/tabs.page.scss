@@ -1,0 +1,13 @@
+
+ion-tab-button{
+    img{
+        width: 25px;
+        height: 25px;
+        &:last-of-type{
+            width: 20px;
+        }
+    }
+}
+ion-tab-bar{
+    height: 60px;
+}
