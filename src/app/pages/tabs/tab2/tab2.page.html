@@ -6,7 +6,7 @@
   <div class="post-cnts" *ngIf="dataLoaded">
     <div class="post-cnt" *ngFor="let post of posts">
       <div class="pet-data">
-        <img [src]="users[post.userId].profileImg || '../../../../assets/icon/foto-perfil.png'" alt="">
+        <img [src]="users[post.userId].profileImg || '../../../../assets/icon/foto-perfil.png'" alt="" (click)="goToProfile(users[post.userId])">
         <p>{{users[post.userId].name}}</p>
       </div>
       <p class="post-text">{{post.text}}</p>

@@ -1,3 +1,4 @@
+import { UtilsService } from './../../../services/utils.service';
 import { CreatePostComponent } from './../../../components/create-post/create-post.component';
 import { PetProvider } from './../../../providers/pet.provider';
 import { PetModel } from './../../../schemes/models/pet.model';
@@ -8,6 +9,7 @@ import { PostModel } from './../../../schemes/models/post.model';
 import { PostProvider } from './../../../providers/post.provider';
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
+import { StrangerProfileModalComponent } from 'src/app/components/stranger-profile-modal/stranger-profile-modal.component';
 
 @Component({
   selector: 'app-tab2',
@@ -23,7 +25,8 @@ export class Tab2Page implements OnInit {
     private navController: NavController,
     private router: Router,
     private petProvider: PetProvider,
-    private modalController: ModalController) { }
+    private modalController: ModalController,
+    private utilsService: UtilsService) { }
 
   async ngOnInit() {
     console.log("init");
@@ -50,19 +53,6 @@ export class Tab2Page implements OnInit {
     });
   }
 
-  ionViewWillLeave() {
-    console.log("leave");
-
-  }
-
-  ngOnDestroy(): void {
-    console.log("destroy");
-  }
-
-  ionViewDidLeave() {
-    console.log("lv");
-  }
-
   async goToCreate() {
     const modal = await this.modalController.create({
       component: CreatePostComponent
@@ -80,6 +70,14 @@ export class Tab2Page implements OnInit {
     const nowDate = new Date();
     return (chatDate.getDate() === nowDate.getDate() && chatDate.getMonth() === nowDate.getMonth() &&
       chatDate.getFullYear() === nowDate.getFullYear())
+  }
+
+  async goToProfile(pet: PetModel){
+    this.utilsService.setDataForNavigation(pet);
+    const modal = await this.modalController.create({
+      component: StrangerProfileModalComponent
+    });
+    return await modal.present();
   }
 
 }
