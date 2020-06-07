@@ -21,51 +21,35 @@
       </div>
     </div>
     <div class="input-cnt">
-      <p for="name">Nombre</p>
-      <input type="text" placeholder="Nombre de la mascota" formControlName="name">
-      <div *ngIf="editForm.controls['name'].errors && editForm.controls['name'].touched"
+      <p for="petName">Nombre</p>
+      <input type="text" placeholder="Nombre de la mascota" formControlName="petName">
+      <div *ngIf="editForm.controls['petName'].errors && editForm.controls['petName'].touched"
         class="error-msg">
-        <div [hidden]="!editForm.controls['name'].errors.required">Introduzca el nombre de la mascota</div>
+        <div [hidden]="!editForm.controls['petName'].errors.required">Introduzca el nombre de la mascota</div>
       </div>
     </div>
     <div class="input-cnt">
-      <p for="age">Edad</p>
-      <input type="number" placeholder="Edad de la mascota" formControlName="age">
-      <div *ngIf="editForm.controls['age'].errors && editForm.controls['age'].touched"
+      <p for="petAge">Edad</p>
+      <input type="number" placeholder="Edad de la mascota" formControlName="petAge">
+      <div *ngIf="editForm.controls['petAge'].errors && editForm.controls['petAge'].touched"
         class="error-msg">
-        <div [hidden]="!editForm.controls['age'].errors.required">Introduzca la edad de la mascota</div>
+        <div [hidden]="!editForm.controls['petName'].errors.required">Introduzca la edad de la mascota</div>
       </div>
     </div>
     <div class="input-cnt">
-      <p for="type">Tipo de mascota</p>
-      <ion-select placeholder="Tipo de mascota" formControlName="type">
-        <ion-select-option value="Burro">Burro</ion-select-option>
-        <ion-select-option value="Caballo">Caballo</ion-select-option>
-        <ion-select-option value="Cabra">Cabra</ion-select-option>
-        <ion-select-option value="Cerdo">Cerdo</ion-select-option>
-        <ion-select-option value="Conejo">Conejo</ion-select-option>
-        <ion-select-option value="Erizo">Erizo</ion-select-option>
-        <ion-select-option value="Gallina">Gallina</ion-select-option>
-        <ion-select-option value="Gallo">Gallo</ion-select-option>
-        <ion-select-option value="Gato">Gato</ion-select-option>
-        <ion-select-option value="Hamster">Hamster</ion-select-option>
-        <ion-select-option value="Pajaro">Pajaro</ion-select-option>
-        <ion-select-option value="Perro">Perro</ion-select-option>
-        <ion-select-option value="Pez">Pez</ion-select-option>
-        <ion-select-option value="Serpiente">Serpiente</ion-select-option>
-        <ion-select-option value="Tortuga">Tortuga</ion-select-option>
-        <ion-select-option value="Toro">Toro</ion-select-option>
-        <ion-select-option value="Vaca">Vaca</ion-select-option>
-        <ion-select-option value="Yegua">Yegua</ion-select-option>
+      <p for="petType">Tipo de mascota</p>
+      <ion-select placeholder="Tipo de mascota" formControlName="petType">
+        <ion-select-option value="perro">Perro</ion-select-option>
+        <ion-select-option value="gato">Gato</ion-select-option>
       </ion-select>
-      <div *ngIf="editForm.controls['type'].errors && editForm.controls['type'].touched"
+      <div *ngIf="editForm.controls['petType'].errors && editForm.controls['petType'].touched"
         class="error-msg">
-        <div [hidden]="!editForm.controls['type'].errors.required">Tipo de mascota requerido</div>
+        <div [hidden]="!editForm.controls['petType'].errors.required">Tipo de mascota requerido</div>
       </div>
     </div>
     <div class="input-cnt">
-      <p for="genre">Género</p>
-      <ion-segment formControlName="genre">
+      <p for="petGenre">Género</p>
+      <ion-segment formControlName="petGenre">
         <ion-segment-button value="masculine">
           Masculino
         </ion-segment-button>
@@ -73,9 +57,9 @@
           Femenino
         </ion-segment-button>
       </ion-segment>
-      <div *ngIf="editForm.controls['genre'].errors && editForm.controls['genre'].touched"
+      <div *ngIf="editForm.controls['petGenre'].errors && editForm.controls['petGenre'].touched"
         class="error-msg">
-        <div [hidden]="!editForm.controls['genre'].errors.required">Género de la mascota requerido</div>
+        <div [hidden]="!editForm.controls['petGenre'].errors.required">Género de la mascota requerido</div>
       </div>
     </div>
     <div class="input-cnt">

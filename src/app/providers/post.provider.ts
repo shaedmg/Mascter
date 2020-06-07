@@ -20,8 +20,4 @@ export class PostProvider{
         post.createdDate = Date.now();
         return this.db.object<PostModel>(`posts/${post.id}`).set(post);
     }
-
-    updatePost(post: PostModel){
-        return this.db.object<PostModel>(`posts/${post.id}`).update(post);
-    }
 }

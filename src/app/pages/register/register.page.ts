@@ -123,7 +123,7 @@ export class RegisterPage implements OnInit {
 
   async uploadPhoto(userId: string){
     this.uploadedImage = await this.utilsService.uploadToStorage(this.imagePreview.dataUrl, `users/${userId}/profile.jpeg`, 'jpeg');
-    // (this.uploadedImage) ? this.utilsService.showToast(`Se ha modificado su foto correctamente`) : null;
+    (this.uploadedImage) ? this.utilsService.showToast(`Se ha modificado tu foto correctamente, ¡recuerda guardar los cambios!`) : null;
   }
 
   goBack(){

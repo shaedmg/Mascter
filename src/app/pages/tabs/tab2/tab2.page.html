@@ -4,19 +4,13 @@
     <img src="../../../../assets/icon/Ei-pencil.svg.png" alt="" (click)="goToCreate()">
   </div>
   <div class="post-cnts" *ngIf="dataLoaded">
-    <div class="post-cnt" *ngFor="let post of posts; trackBy: trackByFunction">
+    <div class="post-cnt" *ngFor="let post of posts">
       <div class="pet-data">
         <img [src]="users[post.userId].profileImg || '../../../../assets/icon/foto-perfil.png'" alt="" (click)="goToProfile(users[post.userId])">
         <p>{{users[post.userId].name}}</p>
       </div>
       <p class="post-text">{{post.text}}</p>
-      <div class="post-extra-data">
-        <div class="likes-cnt">
-          <img [src]="postIsFavourited(post) ? '../../../../assets/icon/filledHeart.png' : '../../../../assets/icon/emptyHeart.png'" alt="" (click)="toogleFavourite(post)">
-          <span>{{post.usersIdThatFavourited ? post.usersIdThatFavourited.length : '0'}}</span>
-        </div>
-        <span>{{isToday(post.createdDate) ? 'Hoy a las ' + ( post.createdDate | date: 'HH:mm') : ( post.createdDate | date: 'HH:mm - dd/MM/yyyy')}}</span>
-      </div>
+      <span>{{isToday(post.createdDate) ? 'Hoy a las ' + (post.createdDate | date: 'HH:mm') : ( post.createdDate | date: 'HH:mm - dd/MM/yyyy')}}</span>
     </div>
   </div>
 </ion-content>
