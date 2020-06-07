@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'chats-tab',
+        loadChildren: () => import('./chats-tab/chats-tab.module').then(m => m.ChatsTabPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
@@ -30,6 +34,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/tab1',
     pathMatch: 'full'
+  },
+  {
+    path: 'chats-tab',
+    loadChildren: () => import('./chats-tab/chats-tab.module').then( m => m.ChatsTabPageModule)
   }
 ];
 

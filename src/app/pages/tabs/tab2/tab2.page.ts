@@ -95,7 +95,11 @@ export class Tab2Page implements OnInit {
 
   toogleFavourite(post: PostModel){
     if(!post.usersIdThatFavourited || !post.usersIdThatFavourited.find(userId => userId === this.currentUserId ) ){
-      post.usersIdThatFavourited = [this.currentUserId];
+      if(!post.usersIdThatFavourited ){
+        post.usersIdThatFavourited =  [this.currentUserId]
+      }else{
+        post.usersIdThatFavourited.push(this.currentUserId);
+      }
     }else{
       post.usersIdThatFavourited = post.usersIdThatFavourited.filter(userId => userId !== this.currentUserId);
     }

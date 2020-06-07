@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="header">
+    <h1>Chats</h1>
+  </div>
+  <div class="chats-list-cnt" *ngIf="chats">
+    <div class="chat-cnt" *ngFor="let chat of chats">
+      <img class="profile-img" [src]="pets[(chat.members[0] == currentUserId) ? chat.members[1] : chat.members[0]].profileImg 
+      || '../../../../assets/icon/foto-perfil.png'" alt="">
+      <div class="chat-data">
+        <div class="top-data">
+          <span>{{pets[(chat.members[0] == currentUserId) ? chat.members[1] : chat.members[0]].name }}</span>
+          <span
+            *ngIf="chat.updatedAt">{{isToday(chat.updatedAt) ? (chat.updatedAt | date: 'HH:mm') : ( chat.updatedAt | date: 'HH:mm - dd/MM/yyyy')}}</span>
+          <span *ngIf="!chat.updatedAt">-</span>
+        </div>
+        <div class="bottom-data">
+          <span>{{chat.lastMessage}}</span>
+          <div class="unread-msgs-cnt" *ngIf="
+          (chat.members[0] == currentUserId) 
+          ? ((chat.totalMessages - chat.readMessages[chat.members[1]]) > 0)
+          : ((chat.totalMessages - chat.readMessages[chat.members[0]]) > 0)">
+            {{
+            (chat.members[0] == currentUserId) 
+            ? (chat.totalMessages - chat.readMessages[chat.members[1]]) 
+            : (chat.totalMessages - chat.readMessages[chat.members[0]])
+          }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
