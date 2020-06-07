@@ -4,27 +4,9 @@
   </div>
   <div class="search-cnt"></div>
   <div class="post-cnts" *ngIf="pets">
-    <div class="pet-data animated bounceInUp" *ngFor="let pet of pets" (click)="goToProfile(pet) ">
-      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
-        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
-      <p>{{pet.name}}</p>
-    </div>
-    <div class="pet-data" *ngFor="let pet of pets" (click)="goToProfile(pet)">
-      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
-        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
-      <p>{{pet.name}}</p>
-    </div>
-    <div class="pet-data" *ngFor="let pet of pets" (click)="goToProfile(pet)">
-      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
-        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
-      <p>{{pet.name}}</p>
-    </div>
-    <div class="pet-data" *ngFor="let pet of pets" (click)="goToProfile(pet)">
-      <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
-        <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
-      <p>{{pet.name}}</p>
-    </div>
-    <div class="pet-data" *ngFor="let pet of pets" (click)="goToProfile(pet)">
+    
+    <div *ngFor="let pet of pets let index = index;trackBy: trackByFunction" class="pet-data animate__animated animate__bounceInUp" (click)="goToProfile(pet)"
+    [style.animation-delay]=" (0.3 * index) + 's'" >
       <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
         <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
       <p>{{pet.name}}</p>

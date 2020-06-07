@@ -4,10 +4,12 @@ export class PostModel{
     text: string;
     userId: string;
     createdDate?: number;
+    usersIdThatFavourited: string[];
 
     constructor(db: AngularFireDatabase){
         this.id = db.createPushId();
         this.text = "";
         this.userId = "";
+        this.usersIdThatFavourited = [];
     }
 }

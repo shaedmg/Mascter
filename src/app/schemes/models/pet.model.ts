@@ -10,6 +10,7 @@ export class PetModel{
     genre: string;
     contactInfo: string;
     profileImg: string;
+    usersIdThatAreInterested: string[];
 
     constructor(){
         this.id = '';
@@ -20,6 +21,7 @@ export class PetModel{
         this.genre = '';
         this.contactInfo = '';
         this.profileImg = '';
+        this.usersIdThatAreInterested = []
     }
 
 }

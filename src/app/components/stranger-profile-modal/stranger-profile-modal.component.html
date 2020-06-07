@@ -1,7 +1,9 @@
 <ion-content *ngIf="pet">
   <div class="header">
-    <img src="../../../assets/icon/Backward arrow.svg" alt="" (click)="goBack()">
+    <img src="../../../assets/icon/Backward arrow.svg" alt="" (click)="goBack()" class="back-btn">
     <h1>{{pet.name}}</h1>
+    <img class="interested-btn" [src]="petIsFavourited(pet) ? '../../../assets/icon/filledHeart.png' : '../../../assets/icon/emptyHeart.png'" alt="" (click)="toogleFavourite(pet)">
+
   </div>
   <div class="photo-cnt">
     <img [src]="pet.profileImg || '../../../assets/icon/foto-perfil.png'" alt="">

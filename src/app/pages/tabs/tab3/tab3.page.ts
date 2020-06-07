@@ -41,8 +41,8 @@ export class Tab3Page {
     console.log(userId);
     
     this.editForm = this.createForm();
-    this.editForm.get('petType').setValue(this.pet.type);
-    this.editForm.get('petGenre').setValue(this.pet.genre);
+    this.editForm.get('type').setValue(this.pet.type);
+    this.editForm.get('genre').setValue(this.pet.genre);
     console.log(this.pet.type);
     
     this.editForm.disable();
@@ -51,10 +51,10 @@ export class Tab3Page {
   createForm(): FormGroup {
     return this.formBuilder.group({
       email: [this.pet.email || ''],
-      petName: [this.pet.name || '', [Validators.required]],
-      petAge: [this.pet.age || 0, [Validators.required]],
-      petType: [this.pet.type , [Validators.required]],
-      petGenre: [this.pet.genre || '', [Validators.required]],
+      name: [this.pet.name || '', [Validators.required]],
+      age: [this.pet.age || 0, [Validators.required]],
+      type: [this.pet.type , [Validators.required]],
+      genre: [this.pet.genre || '', [Validators.required]],
       contactInfo: [this.pet.contactInfo || '', [Validators.required]]
     })
   }
@@ -87,11 +87,12 @@ export class Tab3Page {
 
   async goToViewProfile() {
     const userId = await this.authService.getCurrentUserUid();
+    this.imagePreview = null;
     this.pet = await this.petProvider.getDataById(userId).pipe(take(1)).toPromise();
     this.editForm = this.createForm();
     setTimeout(_ => {
-      this.editForm.get('petType').setValue(this.pet.type);
-      this.editForm.get('petGenre').setValue(this.pet.genre);
+      this.editForm.get('type').setValue(this.pet.type);
+      this.editForm.get('genre').setValue(this.pet.genre);
       this.editForm.disable();
       this.edit = false;
     });
@@ -113,7 +114,7 @@ export class Tab3Page {
 
   async uploadPhoto(userId: string){
     this.uploadedImage = await this.utilsService.uploadToStorage(this.imagePreview.dataUrl, `users/${userId}/profile.jpeg`, 'jpeg');
-    (this.uploadedImage) ? this.utilsService.showToast(`Se ha modificado tu foto correctamente, ¡recuerda guardar los cambios!`) : null;
+    // (this.uploadedImage) ? this.utilsService.showToast(`Se ha modificado tu foto correctamente, ¡recuerda guardar los cambios!`) : null;
   }
 
 

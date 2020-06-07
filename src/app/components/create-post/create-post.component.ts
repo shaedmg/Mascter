@@ -36,6 +36,8 @@ export class CreatePostComponent implements OnInit {
 
   onCreatePost(){
     this.post.userId = this.pet.id;
+    console.log(this.post);
+    
     this.postProvider.createPost(this.post).then(async res => {
       await this.modalController.dismiss(true);
     }).catch(err => {
