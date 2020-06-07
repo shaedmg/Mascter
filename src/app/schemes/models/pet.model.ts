@@ -11,6 +11,8 @@ export class PetModel{
     contactInfo: string;
     profileImg: string;
     usersIdThatAreInterested: string[];
+    usersIdsInWhichIsInterested: string[];
+    chatsIds: string[];
 
     constructor(){
         this.id = '';
@@ -22,6 +24,8 @@ export class PetModel{
         this.contactInfo = '';
         this.profileImg = '';
         this.usersIdThatAreInterested = []
+        this.usersIdsInWhichIsInterested = []
+        this.chatsIds = [];
     }
 
 }

@@ -2,7 +2,7 @@
   <div class="header">
     <img src="../../../assets/icon/Backward arrow.svg" alt="" (click)="goBack()" class="back-btn">
     <h1>{{pet.name}}</h1>
-    <img class="interested-btn" [src]="petIsFavourited(pet) ? '../../../assets/icon/filledHeart.png' : '../../../assets/icon/emptyHeart.png'" alt="" (click)="toogleFavourite(pet)">
+    <img class="interested-btn" [src]="petIsFavourited() ? '../../../assets/icon/filledHeart.png' : '../../../assets/icon/emptyHeart.png'" alt="" (click)="toogleFavourite(pet)">
 
   </div>
   <div class="photo-cnt">
@@ -21,6 +21,6 @@
     <div class="data-cnt" *ngIf="pet.contactInfo">
       <img src="../../../assets/icon/huella.png" alt=""><label> Información de contacto: </label>
     </div>
-    <p class="contact-info-text">{{pet.contactInfo}}</p>
+    <p class="contact-info-text">{{pet .contactInfo && pet.contactInfo}}</p>
   </div>
 </ion-content>
