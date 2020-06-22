@@ -12,7 +12,7 @@
         <div class="top-data">
           <span>{{pets[(chat.members[0] == currentUserId) ? chat.members[1] : chat.members[0]].name }}</span>
           <span
-            *ngIf="chat.updatedAt">{{isToday(chat.updatedAt) ? (chat.updatedAt | date: 'HH:mm') : ( chat.updatedAt | date: 'HH:mm - dd/MM/yyyy')}}</span>
+            *ngIf="chat.updatedAt">{{isToday(chat.updatedAt) ? (chat.updatedAt | date: 'HH:mm') : ( chat.updatedAt | date: 'dd/MM/yyyy')}}</span>
           <span *ngIf="!chat.updatedAt">-</span>
         </div>
         <div class="bottom-data">
