@@ -1,12 +1,12 @@
 
 export class ChatModel {
-    id: string;
-    members: string[];
-    createdAt: number;
-    updatedAt: number;
-    totalMessages: number;
-    readMessages: {[key:string]:number};
-    lastMessage: string;
+    id?: string;
+    members?: string[];
+    createdAt?: number;
+    updatedAt?: number;
+    totalMessages?: number;
+    readMessages?: {[key:string]:number};
+    lastMessage?: string;
     
     constructor() {
         this.id = '';

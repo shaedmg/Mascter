@@ -1,3 +1,5 @@
+import { ChatComponent } from './../../../components/chat/chat.component';
+import { ModalController } from '@ionic/angular';
 import { ChatModel } from "./../../../schemes/models/chat.model";
 import { AuthService } from "./../../../services/auth.service";
 import { PetModel } from "src/app/schemes/models/pet.model";
@@ -24,6 +26,7 @@ export class ChatsTabPage implements OnInit {
     private chatProvider: ChatProvider,
     private petProvider: PetProvider,
     private authService: AuthService,
+    private modalController: ModalController,
   ) {}
 
   ngOnInit() {}
@@ -67,5 +70,19 @@ export class ChatsTabPage implements OnInit {
     const nowDate = new Date();
     return (chatDate.getDate() == nowDate.getDate() && chatDate.getMonth() == nowDate.getMonth() &&
     chatDate.getFullYear() == nowDate.getFullYear())
+  }
+
+  async goToChat(chatId: string, imageProfile: string, userName: string ){
+    console.log(chatId);
+    
+    const modal = await this.modalController.create({
+      component: ChatComponent,
+      componentProps: {
+        chatId,
+        imageProfile,
+        userName
+      }
+    });
+    await modal.present();
   }
 }

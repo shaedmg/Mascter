@@ -1,0 +1,28 @@
+<div class="header">
+  <img class="back-img" (click)="dismissModal()" src="../../../assets/icon/Backward arrow.svg">
+  <img [src]="imageProfile || '../../../assets/icon/foto-perfil.png'" alt="">
+  <span>{{userName}}</span>
+</div>
+<ion-content #content id="content" [scrollEvents]="true" (ionScroll)="checkIfBottom()">
+  <div class="msg-cnt animate__animated" 
+  [class.animate__bounceInLeft]="message.senderId != currentUser.id"
+  [class.animate__bounceInRight]="message.senderId == currentUser.id" 
+  [class.stranger-msg]="message.senderId != currentUser.id" 
+   *ngFor="let message of messages; trackBy: trackByFunction">
+    <p>{{message.text}}</p>
+    <span>{{message.createdAt | date: 'dd/MM/yyyy'}}</span>
+  </div>
+  <div id="hidden-mark"></div>
+</ion-content>
+    <div class="send-input-cnt">
+      <div class="scroll-btn" *ngIf="showScrollBtn" (click)="scrollToBottomOnInit()">
+        <img src="../../../assets/icon/down-arrow.png">
+        <span class="counter-cnt" *ngIf="messagesToRead">{{messagesToRead}}</span>
+      </div>
+      <input type="text" id="send-input" [(ngModel)]="messageToSend">
+      <div class="send-btn-cnt">
+        <img (click)="sendMessage()" src="../../../assets/icon/send-img.png">
+      </div>
+    </div>
+    <!-- <button (click)="scrollBy()">ScrollBy</button>
+    <button (click)="scrollTo()">ScrollTo</button> -->

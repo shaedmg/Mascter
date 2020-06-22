@@ -3,7 +3,9 @@
     <h1>Chats</h1>
   </div>
   <div class="chats-list-cnt" *ngIf="chats">
-    <div class="chat-cnt" *ngFor="let chat of chats">
+    <div class="chat-cnt" *ngFor="let chat of chats" (click)="goToChat(chat.id,
+    pets[(chat.members[0] == currentUserId) ? chat.members[1] : chat.members[0]].profileImg,
+     pets[(chat.members[0] == currentUserId) ? chat.members[1] : chat.members[0]].name )">
       <img class="profile-img" [src]="pets[(chat.members[0] == currentUserId) ? chat.members[1] : chat.members[0]].profileImg 
       || '../../../../assets/icon/foto-perfil.png'" alt="">
       <div class="chat-data">
@@ -17,12 +19,12 @@
           <span>{{chat.lastMessage}}</span>
           <div class="unread-msgs-cnt" *ngIf="
           (chat.members[0] == currentUserId) 
-          ? ((chat.totalMessages - chat.readMessages[chat.members[1]]) > 0)
-          : ((chat.totalMessages - chat.readMessages[chat.members[0]]) > 0)">
+          ? ((chat.totalMessages - chat.readMessages[chat.members[0]]) > 0)
+          : ((chat.totalMessages - chat.readMessages[chat.members[1]]) > 0)">
             {{
             (chat.members[0] == currentUserId) 
-            ? (chat.totalMessages - chat.readMessages[chat.members[1]]) 
-            : (chat.totalMessages - chat.readMessages[chat.members[0]])
+            ? (chat.totalMessages - chat.readMessages[chat.members[0]]) 
+            : (chat.totalMessages - chat.readMessages[chat.members[1]])
           }}
           </div>
         </div>
