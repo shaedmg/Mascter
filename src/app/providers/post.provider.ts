@@ -21,7 +21,14 @@ export class PostProvider{
         return this.db.object<PostModel>(`posts/${post.id}`).set(post);
     }
 
+    getAllPostByUserId(userId: string): Observable<PostModel[]> {
+        return this.db.list<PostModel>('posts', ref => ref.orderByChild('userId').equalTo(userId)).valueChanges();
+    }
+
     updatePost(post: PostModel){
         return this.db.object<PostModel>(`posts/${post.id}`).update(post);
+    }
+    deletePost(postId: string){
+        return this.db.object<PostModel>(`posts/${postId}`).remove();
     }
 }

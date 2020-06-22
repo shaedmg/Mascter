@@ -1,4 +1,6 @@
-import { NavController } from '@ionic/angular';
+import { PostProvider } from 'src/app/providers/post.provider';
+import { PostModel } from 'src/app/schemes/models/post.model';
+import { NavController, AlertController } from '@ionic/angular';
 import { PetProvider } from '../../../providers/pet.provider';
 import { UtilsService } from './../../../services/utils.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,12 +22,20 @@ export class Tab3Page {
   pet: PetModel;
   imagePreview: any;
   uploadedImage: string;
+  section = "profile";
+  dataLoaded: boolean;
+  currentUserId: string;
+  postSubscription: any;
+  posts: PostModel[];
+  users: {[key: string]: PetModel} = {};
 
   constructor(private authService: AuthService,
     private formBuilder: FormBuilder,
     private utilsService: UtilsService,
     private petProvider: PetProvider,
     private navController: NavController,
+    private postProvider: PostProvider,
+    private alertController: AlertController
   ) { }
 
   async onLogout() {
@@ -34,6 +44,7 @@ export class Tab3Page {
   }
 
   async ionViewWillEnter() {
+    this.initPostAndUsersData();
     this.edit = false;
     const userId = await this.authService.getCurrentUserUid();
     this.pet = await this.petProvider.getDataById(userId).pipe(take(1)).toPromise();
@@ -116,6 +127,68 @@ export class Tab3Page {
     this.uploadedImage = await this.utilsService.uploadToStorage(this.imagePreview.dataUrl, `users/${userId}/profile.jpeg`, 'jpeg');
     // (this.uploadedImage) ? this.utilsService.showToast(`Se ha modificado tu foto correctamente, ¡recuerda guardar los cambios!`) : null;
   }
+  goTo(view: string): void{
+    this.section = view;
+  }
 
+  trackByFunction(item) {
+    return item.id;
+  }
+
+  async initPostAndUsersData(){
+    this.dataLoaded = false;
+    this.currentUserId = await this.authService.getCurrentUserUid()
+    this.postSubscription = this.postProvider.getAllPostByUserId(this.currentUserId).subscribe(res => {
+      this.posts = res.reverse();
+      const users = [...new Set(this.posts.map(post => post.userId))];     
+      const promisesArr = users.map(async user =>
+        await this.petProvider.getDataById(user).pipe(take(1)).toPromise()
+      );
+      Promise.all(promisesArr).then(res => {
+        res.forEach(pet => {
+          this.users[pet.id] = pet;
+        });
+        this.dataLoaded = true;
+      });
+    });
+    /* tslint:disable-next-line */
+  }
+
+  isToday(chatTimestamp: number): boolean {
+    const chatDate = new Date(chatTimestamp);
+    const nowDate = new Date();
+    return (chatDate.getDate() === nowDate.getDate() && chatDate.getMonth() === nowDate.getMonth() &&
+      chatDate.getFullYear() === nowDate.getFullYear())
+  }
+
+  async deletePost(postId: string){
+    const alert = await this.alertController.create({
+      cssClass: "my-custom-class",
+      message: "Desea borrar permanentemente esta publicación?",
+      buttons: [
+        {
+          text: "No",
+          role: "cancel",
+          cssClass: "secondary",
+          handler: (blah) => {
+            console.log("Confirm Cancel: blah");
+          },
+        },
+        {
+          text: "Si",
+          handler: async () => {
+            await this.utilsService.presentLoading();
+            this.postProvider.deletePost(postId).then(async _ => {
+              this.utilsService.dissmissLoading();
+            }).catch(async _ => {
+              this.utilsService.dissmissLoading();
+              this.utilsService.showToast("Un error ha ocurrido, vuelva a intentarlo mas tarde");
+            })
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
 
 }

@@ -114,5 +114,6 @@ export class Tab2Page implements OnInit {
   trackByFunction(item) {
     return item.id;
   }
+  
 
 }

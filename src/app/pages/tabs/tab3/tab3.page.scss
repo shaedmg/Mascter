@@ -1,110 +1,222 @@
 ion-content {
-    --background: transparent;
-    .top-bg-img{
-        position: absolute;
-        top: 163px;
-        left: 92px;
-        z-index: -1;
+  --background: transparent;
+  .top-bg-img {
+    position: absolute;
+    top: 163px;
+    left: 92px;
+    z-index: -1;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 37px;
+    padding-right: 37px;
+    margin-top: 39px;
+    &.centered-header {
+      justify-content: left;
+      img {
+        height: 20px;
+        width: 20px;
+        margin-right: 30px;
+      }
     }
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-left: 37px;
-        padding-right: 37px;
-        margin-top: 39px;
-        &.centered-header {
-            justify-content: left;
-            img {
-                height: 20px;
-                width: 20px;
-                margin-right: 30px;
-            }
-        }
-        h1 {
-            text-align: center;
-            font-weight: bold;
-            font-size: 20px;
-            text-align: center;
-            margin: 0;
-        }
-        img {
-            height: 20px;
-            width: 20px;
-        }
+    h1 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+      text-align: center;
+      margin: 0;
     }
-    form {
+    img {
+      height: 20px;
+      width: 20px;
+    }
+  }
+  .border-top-cnt {
+    padding-top: 40px;
+    border-top: 1px solid orange;
+    border-radius: 40px;
+    .post-cnts {
+      // background-color: lightgray;
+      background-color: cornflowerblue;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      .post-cnt {
         display: flex;
         flex-direction: column;
         align-items: center;
-        .photo-cnt {
-            margin-top: 30px;
-            margin-bottom: 40px;
-            img {
-                height: 80px;
-                width: 80px;
-                border-radius: 50%;
-            }
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        background-color: white;
+        &:last-child {
+          margin-bottom: 0;
         }
-        .edit-cnt {
-            text-align: right;
-            width: 100%;
-            img {
-                width: 40px;
-                height: 40px;
-                margin-right: 33px;
-                object-fit: fill;
-            }
+        .pet-data {
+          display: flex;
+          width: 100%;
+          padding-left: 25px;
+          /* border-bottom: 1px solid lightgray; */
+          align-items: center;
+          img {
+            height: 30px;
+            width: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+          }
+          .delete-btn {
+            background-color: sienna;
+            border-radius: 5px;
+            padding: 2px;
+            display: inline-block;
+            margin-left: auto;
+          }
         }
-        .passwords-cnts {
-            width: 100%;
+        .post-text {
+          width: 100%;
+          padding-left: 25px;
+          padding-right: 25px;
+          margin: 0;
+          margin-top: 5px;
+        }
+        .post-extra-data {
+          display: flex;
+          width: 100%;
+          padding-left: 25px;
+          justify-content: space-between;
+          margin-top: 15px;
+          .likes-cnt {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        ion-segment,
-        ion-select {
-            margin-bottom: 15px;
-        }
-        .input-cnt {
-            padding-left: 37px;
-            padding-right: 37px;
-            width: 100%;
-            p {
-                font-size: 15px;
-                font-weight: bold;
-                margin: 0;
-                margin-bottom: 10px;
+            img {
+              height: 20px;
+              margin-right: 6px;
             }
-            input {
-                width: 80%;
-                border: 1px solid lightgray;
-                border-bottom: 1px solid lightgray;
-                border-radius: 5px;
-                padding-left: 11px;
-                width: 100%;
-                margin-bottom: 15px;
+            span {
+              padding-right: 25px;
+              font-size: 13px;
+              margin-top: 1px;
             }
-            .email-input{
-                    background-color: rgba(239, 239, 239);
-            }
+          }
+          span {
+            padding-right: 25px;
+            font-size: 13px;
+            margin-bottom: 10px;
+          }
         }
-        & > .input-cnt:last-child {
-            margin-bottom: 80px;
-        }
-        .btn-cnt{
-            display: flex;
-            width: 100%;
-            background: transparent;
-            justify-content: center;
-            margin-bottom: 30px;
-            margin-top: 30px;
-            .submit-btn {
-                width: 70%;
-                height: 50px;
-                color: white;
-                border-radius: 25px;
-            }
-        }
+      }
     }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .profile-sections-cnt {
+      display: flex;
+      justify-content: space-evenly;
+      background-color: white;
+      border: 1px solid orange;
+      padding: 5px;
+      margin-left: 40px;
+      margin-right: 40px;
+      border-radius: 10px;
+      border-bottom: none;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      span {
+        color: blue;
+      }
+      .active-section {
+        color: black;
+        text-decoration: none;
+      }
+    }
+    .inputs-cnts {
+      padding-top: 10px;
+      border-top: 1px solid orange;
+      border-top-right-radius: 40px;
+      border-top-left-radius: 40px;
+      width: 100%;
+    }
+    .photo-cnt {
+      margin-top: 30px;
+      margin-bottom: 40px;
+      position: relative;
+      img {
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+      }
+      .edit-img {
+        width: 40px;
+        height: 40px;
+        margin-right: 33px;
+        object-fit: fill;
+        position: absolute;
+        top: -25px;
+        right: -70px;
+      }
+    }
+    .edit-cnt {
+      text-align: right;
+      width: 100%;
+      img {
+        width: 40px;
+        height: 40px;
+        margin-right: 33px;
+        object-fit: fill;
+      }
+    }
+    .passwords-cnts {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    ion-segment,
+    ion-select {
+      margin-bottom: 15px;
+    }
+    .input-cnt {
+      padding-left: 37px;
+      padding-right: 37px;
+      width: 100%;
+      p {
+        font-size: 15px;
+        font-weight: bold;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      input {
+        width: 80%;
+        border: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+        border-radius: 5px;
+        padding-left: 11px;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      .email-input {
+        background-color: rgba(239, 239, 239);
+      }
+    }
+    & > .input-cnt:last-child {
+      margin-bottom: 80px;
+    }
+    .btn-cnt {
+      display: flex;
+      width: 100%;
+      background: transparent;
+      justify-content: center;
+      margin-bottom: 30px;
+      margin-top: 30px;
+      .submit-btn {
+        width: 70%;
+        height: 50px;
+        color: white;
+        border-radius: 25px;
+      }
+    }
+  }
 }

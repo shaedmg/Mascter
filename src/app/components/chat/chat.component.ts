@@ -37,6 +37,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   messagesToRead: number = 0;
   showScrollBtn: boolean = false;
   scrolling: boolean = false;
+  chatSubscription: Subscription;
+  messageSubscription: Subscription;
 
   constructor(
     private messageProvider: MessageProvider,
@@ -53,11 +55,11 @@ export class ChatComponent implements OnInit, OnDestroy {
       .getDataById(await this.authService.getCurrentUserUid())
       .pipe(take(1))
       .toPromise();
-    this.chatProvider.getDataById(this.chatId).subscribe((res) => {
+    this.chatSubscription = this.chatProvider.getDataById(this.chatId).subscribe((res) => {
       this.chat = res;
       this.strangerId = this.chat.members.find((r) => r != this.currentUser.id);
     });
-    this.messageProvider.getmessageByChatId(this.chatId).subscribe((res) => {
+    this.messageSubscription = this.messageProvider.getmessageByChatId(this.chatId).subscribe((res) => {
       this.scrolling = true;
       this.messages = res;
       if (!this.isVisible())this.messagesToRead++;
@@ -86,6 +88,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
   async ionViewWillLeave() {
     this.pauseSubscription.unsubscribe();
+    this.chatSubscription.unsubscribe();
+    this.messageSubscription.unsubscribe();
     this.updateMessagesRead();
     Keyboard.removeAllListeners();
   }
