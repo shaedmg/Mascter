@@ -117,13 +117,12 @@ export class RegisterPage implements OnInit {
     const cameraOptions: CameraOptions = await this.utilsService.actionSheetCameraOptions();
     const image = await Camera.getPhoto(cameraOptions);
     this.imagePreview = image;
-    console.log(image);
-    console.log(image.webPath);
   }
 
   async uploadPhoto(userId: string){
-    this.uploadedImage = await this.utilsService.uploadToStorage(this.imagePreview.dataUrl, `users/${userId}/profile.jpeg`, 'jpeg');
-    // (this.uploadedImage) ? this.utilsService.showToast(`Se ha modificado su foto correctamente`) : null;
+    this.uploadedImage = await this.utilsService.uploadToStorage(
+      this.imagePreview.dataUrl, `users/${userId}/profile.jpeg`, 'jpeg'
+      );
   }
 
   goBack(){

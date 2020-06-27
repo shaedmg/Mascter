@@ -27,6 +27,13 @@ export class PetProvider {
     updatePet(pet: PetModel): Promise<void>{
         return this.db.object<PetModel>(`pets/${pet.id}`).update(pet);
     }
+
+    updatePetLocation(petId: string, ubication: {ubication : {latitude: number, longitude: number}}){
+        console.log(petId);
+        console.log(ubication);
+        
+        return this.db.object<PetModel>(`pets/${petId}`).update(ubication)
+    }
     
     getPetByEmail(email: string){
         return this.db.list<PetModel>('pets', ref => ref.orderByChild('email').equalTo(email)).valueChanges();

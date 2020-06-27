@@ -201,6 +201,17 @@ ion-content {
         background-color: rgba(239, 239, 239);
       }
     }
+    .ubication-cnt{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      margin-top: 25px;
+      label{
+        font-size: 15px;
+        color: blue;
+      }
+    }
     & > .input-cnt:last-child {
       margin-bottom: 80px;
     }

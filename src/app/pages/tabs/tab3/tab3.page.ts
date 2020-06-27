@@ -1,3 +1,4 @@
+import { GeolocationService } from './../../../services/geolocation.service';
 import { PostProvider } from 'src/app/providers/post.provider';
 import { PostModel } from 'src/app/schemes/models/post.model';
 import { NavController, AlertController } from '@ionic/angular';
@@ -28,6 +29,7 @@ export class Tab3Page {
   postSubscription: any;
   posts: PostModel[];
   users: {[key: string]: PetModel} = {};
+  ubicationChecked: any;
 
   constructor(private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -35,7 +37,8 @@ export class Tab3Page {
     private petProvider: PetProvider,
     private navController: NavController,
     private postProvider: PostProvider,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private geolocationService: GeolocationService,
   ) { }
 
   async onLogout() {
@@ -51,6 +54,7 @@ export class Tab3Page {
     console.log(this.pet);
     console.log(userId);
     
+    this.ubicationChecked = !!this.pet.ubication;
     this.editForm = this.createForm();
     this.editForm.get('type').setValue(this.pet.type);
     this.editForm.get('genre').setValue(this.pet.genre);
@@ -66,7 +70,8 @@ export class Tab3Page {
       age: [this.pet.age || 0, [Validators.required]],
       type: [this.pet.type , [Validators.required]],
       genre: [this.pet.genre || '', [Validators.required]],
-      contactInfo: [this.pet.contactInfo || '', [Validators.required]]
+      contactInfo: [this.pet.contactInfo || '', [Validators.required]],
+      ubicationChecked: [!!this.pet.ubication]
     })
   }
 
@@ -77,7 +82,7 @@ export class Tab3Page {
     }
     await this.utilsService.presentLoading();
     Object.keys(this.editForm.controls).forEach(control => {
-      if (control !== "passwords") {
+      if (control !== "passwords" && control !== "ubicationChecked") {
         this.pet[control] = this.editForm.get(`${control}`).value;
       }
     });
@@ -87,6 +92,22 @@ export class Tab3Page {
       });
       this.pet.profileImg = this.uploadedImage;
     }
+    console.log(this.editForm.controls.ubicationChecked);
+    console.log(this.geolocationService.getTrackingState());
+    
+    if(this.editForm.controls.ubicationChecked.value && !this.geolocationService.getTrackingState()){
+      const geolocation = await this.geolocationService.getCurrentLocation().catch(_ => {});
+      if(geolocation){
+        this.pet.ubication = {latitude: geolocation.coords.latitude, longitude: geolocation.coords.longitude};
+      }else{
+        this.utilsService.showToast("Profavor, active la ubicación de su dispositivo");
+      }
+      await this.geolocationService.startTrackingLocation();
+    }
+    else if(!this.editForm.controls.ubicationChecked.value && this.geolocationService.getTrackingState())
+       this.geolocationService.stopTrackingLocation();
+       console.log("esperando para update");
+       
     this.petProvider.updatePet(this.pet).catch(err => {
       this.utilsService.showToast("Algo ha salido mal, vuelva a intentarlo");
       this.utilsService.dissmissLoading();
@@ -189,6 +210,11 @@ export class Tab3Page {
       ],
     });
     await alert.present();
+  }
+
+  ubicationToggled(){
+    console.log(this.ubicationChecked);
+    
   }
 
 }

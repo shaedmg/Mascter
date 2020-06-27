@@ -13,6 +13,7 @@ export class PetModel{
     usersIdThatAreInterested: string[];
     usersIdsInWhichIsInterested: string[];
     chatsIds: string[];
+    ubication?: {latitude: number, longitude: number};
 
     constructor(){
         this.id = '';

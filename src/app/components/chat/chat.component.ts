@@ -74,7 +74,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.updateMessagesRead();
     });
     this.ionContentHeight = document.getElementById("content").offsetHeight;
-
     Keyboard.addListener("keyboardWillShow", () => {
       if (this.isVisible()) this.scrollToBottomOnInit(100);
     });

@@ -83,6 +83,10 @@
           <div [hidden]="!editForm.controls['genre'].errors.required">Género de la mascota requerido</div>
         </div>
       </div>
+      <div class="input-cnt ubication-cnt">
+        <label>Geolocalización</label>
+        <ion-toggle formControlName="ubicationChecked" [disabled]="!edit"></ion-toggle>
+      </div>
       <div class="input-cnt">
         <p for="contactInfo">Información de contacto</p>
         <input type="text" placeholder="Forma de contacto" formControlName="contactInfo">
