@@ -57,7 +57,7 @@ export class Tab1Page {
     }
   }
   ionViewWillLeave(){
-    if(this.petSubscription) this.petSubscription.unsubscribe();
+    if ( this.petSubscription ) this.petSubscription.unsubscribe();
     if ( this.petsSubscription ) this.petsSubscription.unsubscribe();
   }
 
@@ -73,8 +73,9 @@ export class Tab1Page {
   }
 
   sortUsersByDistance(pets: PetModel[]) {
-    //console.log(this.filteredUsers);
-    return JSON.parse(JSON.stringify(pets)).filter((r: PetModel) => r && r.ubication).sort((r: PetModel, s: PetModel) => 
+    if(!pets || pets.length == 0) return [];
+    return JSON.parse(JSON.stringify(pets)).filter((r: PetModel) => r && r.ubication)
+    .sort((r: PetModel, s: PetModel) => 
       this.getDistanceFromLatLonInKm(this.pet.ubication.latitude, this.pet.ubication.longitude,
         r.ubication.latitude, r.ubication.longitude) - this.getDistanceFromLatLonInKm(
           this.pet.ubication.latitude, this.pet.ubication.longitude,
@@ -83,22 +84,18 @@ export class Tab1Page {
   }
 
   getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2): number {
-    var R: number = 6371; // Radius of the earth in km
-    var dLat: number = this.deg2rad(lat2 - lat1);  // deg2rad below
-    var dLon: number = this.deg2rad(lon2 - lon1);
-    var a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    var c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d: number = R * c; // Distance in km
-    // console.log(d);
-
-    return d;
+    const earthRadius: number = 6371;
+    var dLat: number = this.degreesToRad(lat2 - lat1); 
+    var dLon: number = this.degreesToRad(lon2 - lon1);
+    const latA = this.degreesToRad(lat1) ;
+    const latB = this.degreesToRad(lat2);
+    return (2 * earthRadius * Math.asin(Math.sqrt(Math.pow(Math.sin(dLat / 2), 2) +
+      Math.cos(latA) * Math.cos(latB) *
+      Math.pow(Math.sin(dLon / 2), 2))));
   }
 
 
-  deg2rad(deg): number {
+  degreesToRad(deg): number {
     return deg * (Math.PI / 180)
   }
 }

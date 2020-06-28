@@ -29,9 +29,6 @@ export class PetProvider {
     }
 
     updatePetLocation(petId: string, ubication: {ubication : {latitude: number, longitude: number}}){
-        console.log(petId);
-        console.log(ubication);
-        
         return this.db.object<PetModel>(`pets/${petId}`).update(ubication)
     }
     

@@ -43,6 +43,7 @@ export class Tab3Page {
 
   async onLogout() {
     await this.authService.logout();
+    if (this.geolocationService.getTrackingState()) await this.geolocationService.stopTrackingWithoutNullValue();
     this.navController.navigateBack('login');
   }
 

@@ -29,7 +29,6 @@ export class AuthGuard implements CanActivateChild {
       map((authState) => !!authState),
       tap(authenticated => {
         console.log(authenticated);
-        
         if (!authenticated) this.router.navigate(['login']);
         else {
           this.authService.getCurrentUserUid().then(res => {

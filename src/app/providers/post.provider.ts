@@ -25,10 +25,10 @@ export class PostProvider{
         return this.db.list<PostModel>('posts', ref => ref.orderByChild('userId').equalTo(userId)).valueChanges();
     }
 
-    updatePost(post: PostModel){
+    updatePost(post: PostModel): Promise<void>{
         return this.db.object<PostModel>(`posts/${post.id}`).update(post);
     }
-    deletePost(postId: string){
+    deletePost(postId: string): Promise<void>{
         return this.db.object<PostModel>(`posts/${postId}`).remove();
     }
 }

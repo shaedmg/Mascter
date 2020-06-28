@@ -2,18 +2,26 @@
   <div class="header">
     <img src="../../../assets/icon/Backward arrow.svg" alt="" (click)="goBack()">
     <h1>Crear publicación</h1>
+    <img src="../../../assets/icon/camara.png" alt="" (click)="takePhoto()">
   </div>
-  <div class="data-cnt" *ngIf="pet">
-    <div class="pet-data">
-      <img [src]="pet.profileImg || '../../../assets/icon/foto-perfil.png'" alt="">
-      <span>{{pet.name}}</span>
+  <div class="all-data-cnt">
+    <div class="data-cnt" *ngIf="pet">
+      <div class="pet-data">
+        <img [src]="pet.profileImg || '../../../assets/icon/foto-perfil.png'" alt="">
+        <span>{{pet.name}}</span>
+      </div>
+      <div class="text-cnt">
+        <ion-textarea autoGrow="true" placeholder="¿Qué quieres publicar?" name="" id="" [(ngModel)]="post.text">
+        </ion-textarea>
+      </div>
+      <div class="img-cnt">
+        <img class="delete-img" src="../../../assets/icon/close.png" (click)="imagePreview = null" alt="" *ngIf="imagePreview">
+        <img class="image-preview" *ngIf="imagePreview && imagePreview.dataUrl" [src]="imagePreview && imagePreview.dataUrl"
+         (click)="goToImgPreview((imagePreview && imagePreview.dataUrl) || post.image)" alt="">
+      </div>
     </div>
-    <div class="text-cnt">
-      <textarea placeholder="¿Qué quieres publicar?" name="" id="" rows="10" [(ngModel)]="post.text"></textarea>
-    </div>
-    <div class="btn-cnt">
+    <div class="btn-cnt" *ngIf="pet">
       <button class="submit-btn" [disabled]="post.text.length == 0" (click)="onCreatePost()">Publicar</button>
     </div>
   </div>
-  </ion-content>
-  
+</ion-content>
