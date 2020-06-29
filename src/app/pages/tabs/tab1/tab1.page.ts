@@ -1,3 +1,4 @@
+import { UsersFiltersModalComponent } from './../../../components/users-filters-modal/users-filters-modal.component';
 import { RandomMatcherModalComponent } from './../../../components/random-matcher-modal/random-matcher-modal.component';
 import { Plugins } from '@capacitor/core';
 import { trigger, transition, style, animate } from '@angular/animations';
@@ -32,6 +33,15 @@ export class Tab1Page {
   petsSubscription: Subscription;
   pet: PetModel;
   petSubscription: Subscription;
+  filters: {
+    age: {
+      min: number,
+      max: number
+    },
+    genre: string,
+    type: string
+  };
+  filteredPets: PetModel[];
 
   constructor(
     private authService: AuthService,
@@ -46,20 +56,33 @@ export class Tab1Page {
   }
   async ionViewWillEnter(){
     const currentUserUid = await  this.authService.getCurrentUserUid();
+    this.filters = {
+      age: {
+        min: 0,
+        max: 99
+      },
+      genre: '',
+      type: ''
+    };
     this.pet = await this.petProvider.getDataById(currentUserUid).pipe(take(1)).toPromise();
     if ( this.pet.ubication ){
       this.petSubscription = this.petProvider.getDataById(currentUserUid).subscribe(res => {
         this.pet = res;
-        if(this.pet.ubication) this.sortUsersByDistance(this.pets);
+        if(this.pet.ubication) this.updatePets();
       });
       this.petsSubscription = this.petProvider.getAllData().subscribe(res => {
         this.pets = this.sortUsersByDistance(res.filter( pet => pet.id !== currentUserUid && pet.ubication));
+        this.updatePets();
       });
     }
   }
   ionViewWillLeave(){
     if ( this.petSubscription ) this.petSubscription.unsubscribe();
     if ( this.petsSubscription ) this.petsSubscription.unsubscribe();
+  }
+  
+  updatePets(){
+    this.filteredPets = this.filterByFilters(this.sortUsersByDistance(this.pets));
   }
 
   async goToProfile(pet: PetModel){
@@ -69,6 +92,7 @@ export class Tab1Page {
     });
     return await modal.present();
   }
+
   trackByFunction(item) {
     return item.id;
   }
@@ -95,7 +119,6 @@ export class Tab1Page {
       Math.pow(Math.sin(dLon / 2), 2))));
   }
 
-
   degreesToRad(deg): number {
     return deg * (Math.PI / 180)
   }
@@ -103,6 +126,37 @@ export class Tab1Page {
   async goToRandomMatcher(){
     const modal = await this.modalController.create({
       component: RandomMatcherModalComponent
+    });
+    await modal.present();
+  }
+
+  filterByFilters(pets: PetModel[]): PetModel[]{
+    const petsCopy = JSON.parse(JSON.stringify(pets));
+    return petsCopy.filter((pet: PetModel) => (this.sortByAge(pet) && this.sortByGenre(pet) && this.sortByType(pet)));
+  }
+
+  sortByAge(pet: PetModel): boolean {
+    return pet.age >= this.filters.age.min && pet.age <= this.filters.age.max;
+  }
+  
+  sortByType(pet: PetModel): boolean {
+    return this.filters.type ? pet.type === this.filters.type : true;
+  }
+
+  sortByGenre(pet: PetModel): boolean {
+    return this.filters.genre ? pet.genre === this.filters.genre : true;
+  }
+
+  async goToFilters(){
+    const modal = await this.modalController.create({
+      component: UsersFiltersModalComponent,
+      componentProps: { filters: JSON.parse(JSON.stringify(this.filters))}
+    });
+    modal.onDidDismiss().then(res => {
+       if ( res && res.data) {
+         this.filters = res.data;
+        this.updatePets();
+       }
     });
     await modal.present();
   }

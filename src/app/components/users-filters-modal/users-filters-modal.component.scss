@@ -1,0 +1,75 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    box-shadow: 0px 6px 10px 0px rgba(160, 82, 45, 0.16);
+    margin-bottom: 40px;
+    padding-left: 37px;
+    padding-right: 37px;
+    span{
+        font-size: 20px;
+        color: cornflowerblue;
+    }
+    img{
+        height: 20px;
+    }
+}
+ion-content{
+    .filter-cnt {
+        width: 100%;
+        padding-left: 37px;
+        padding-right: 37px;
+        margin-bottom: 20px;
+        p {
+          font-size: 15px;
+          font-weight: bold;
+          margin: 0;
+          margin-bottom: 10px;
+          color: cornflowerblue;
+        }
+        input {
+          width: 80%;
+          border: 1px solid lightgray;
+          border-bottom: 1px solid lightgray;
+          border-radius: 5px;
+          padding-left: 11px;
+          width: 100%;
+        }
+        button{
+            background-color: white;
+            border: 1px solid sienna;
+            border-radius: 6px;
+            padding: 5px;
+            font-size: 14px;
+        }
+      }
+      
+    .btns-cnt{
+        display: flex;
+        margin-bottom: 20px;
+        justify-content: space-between;
+        padding-left: 37px;
+        padding-right: 37px;
+        div {
+            width: 45%;
+            border: 1px solid sienna;
+            border-radius: 10px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+ion-segment,
+ion-select {
+  margin-bottom: 15px;
+}
+.age-cnts{
+    display: flex;
+    justify-content: space-between;
+    .age-cnt{
+        width: 40%;
+    }
+}

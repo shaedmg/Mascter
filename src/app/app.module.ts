@@ -22,6 +22,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { UsersFiltersModalComponent } from './components/users-filters-modal/users-filters-modal.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -30,7 +31,8 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [AppComponent, CreatePostComponent, 
     StrangerProfileModalComponent, ChatComponent, 
-    ImagePreviewComponent, RandomMatcherModalComponent],
+    ImagePreviewComponent, RandomMatcherModalComponent,
+    UsersFiltersModalComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

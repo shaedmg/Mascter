@@ -239,3 +239,10 @@ ion-content {
   margin-right: auto;
   margin-top: 15px;
 }
+
+ion-textarea{
+  border: 1px solid orange;
+  --border-radius: 20px !important;
+  border-radius: 10px;
+  padding-left: 7px;
+}

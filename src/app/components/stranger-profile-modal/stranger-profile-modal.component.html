@@ -15,8 +15,8 @@
     <div class="data-cnt" *ngIf="pet.type">
       <img src="../../../assets/icon/huella.png" alt=""><label> Tipo de mascota: </label><span>{{pet.type}}</span>
     </div>
-    <div class="data-cnt" *ngIf="pet.age">
-      <img src="../../../assets/icon/huella.png" alt=""><label> Edad: </label><span>{{pet.age}}</span>
+    <div class="data-cnt" *ngIf="pet.age >= 0">
+      <img src="../../../assets/icon/huella.png" alt=""><label> Edad: </label><span>{{pet.age}} años</span>
     </div>
     <div class="data-cnt" *ngIf="pet.description">
       <img src="../../../assets/icon/huella.png" alt=""><label> Descripción: </label>
