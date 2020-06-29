@@ -1,5 +1,5 @@
 <ion-content [class.padded-content]="edit">
-  <img src="../../../../assets/icon/huellas.png" alt="" class="top-bg-img">
+  <img *ngIf="section== 'profile'" src="../../../../assets/icon/huellas.png" alt="" class="top-bg-img">
   <div class="header" [class.centered-header]="edit">
     <img *ngIf="edit == true && pet" (click)="goToViewProfile()" src="../../../../assets/icon/Backward arrow.svg">
     <h1>Perfil</h1>
@@ -7,88 +7,119 @@
   </div>
   <form *ngIf="pet" [formGroup]="editForm" (ngSubmit)="onSave()">
     <div class="photo-cnt">
-      <img [src]="(imagePreview && imagePreview.dataUrl) || pet.profileImg || '../../../../assets/icon/foto-perfil.png'  " alt="" (click)="edit == true && takePhoto()">
+      <img class="edit-img" src="../../../../assets/icon/Ei-pencil.svg.png" alt=""
+        *ngIf="section == 'profile' && edit == false && pet" (click)="goToEdit()">
+      <img
+        [src]="(imagePreview && imagePreview.dataUrl) || pet.profileImg || '../../../../assets/icon/foto-perfil.png'  "
+        alt="" (click)="section == 'profile' && 
+      edit == true && takePhoto()">
     </div>
     <div class="edit-cnt">
-      <img src="../../../../assets/icon/Ei-pencil.svg.png" alt="" *ngIf="edit == false && pet" (click)="goToEdit()">
-    </div>
-    <div class="input-cnt">
-      <p for="email">Email</p>
-      <input type="email" placeholder="Email" formControlName="email" class="email-input">
-      <div *ngIf="editForm.controls['email'].errors && editForm.controls['email'].touched" class="error-msg">
-        <div [hidden]="!editForm.controls['email'].errors.required">Introduzca un email</div>
-        <div [hidden]="!editForm.controls['email'].errors.email">Introduzca un email válido</div>
+      <div class="profile-sections-cnt" *ngIf="!edit">
+        <span [class.active-section]="section == 'profile'" (click)="goTo('profile')">Perfil</span>
+        <span [class.active-section]="section == 'posts'" (click)="goTo('posts')">Publicaciones</span>
       </div>
     </div>
-    <div class="input-cnt">
-      <p for="name">Nombre</p>
-      <input type="text" placeholder="Nombre de la mascota" formControlName="name">
-      <div *ngIf="editForm.controls['name'].errors && editForm.controls['name'].touched"
-        class="error-msg">
-        <div [hidden]="!editForm.controls['name'].errors.required">Introduzca el nombre de la mascota</div>
+    <div class="inputs-cnts" *ngIf="section == 'profile'">
+      <div class="input-cnt first-input">
+        <p for="email">Email</p>
+        <input type="email" placeholder="Email" formControlName="email" class="email-input">
+        <div *ngIf="editForm.controls['email'].errors && editForm.controls['email'].touched" class="error-msg">
+          <div [hidden]="!editForm.controls['email'].errors.required">Introduzca un email</div>
+          <div [hidden]="!editForm.controls['email'].errors.email">Introduzca un email válido</div>
+        </div>
+      </div>
+      <div class="input-cnt">
+        <p for="name">Nombre</p>
+        <input type="text" placeholder="Nombre de la mascota" formControlName="name">
+        <div *ngIf="editForm.controls['name'].errors && editForm.controls['name'].touched" class="error-msg">
+          <div [hidden]="!editForm.controls['name'].errors.required">Introduzca el nombre de la mascota</div>
+        </div>
+      </div>
+      <div class="input-cnt">
+        <p for="age">Edad</p>
+        <input type="number" placeholder="Edad de la mascota" formControlName="age">
+        <div *ngIf="editForm.controls['age'].errors && editForm.controls['age'].touched" class="error-msg">
+          <div [hidden]="!editForm.controls['age'].errors.required">Introduzca la edad de la mascota</div>
+        </div>
+      </div>
+      <div class="input-cnt">
+        <p for="type">Tipo de mascota</p>
+        <ion-select placeholder="Tipo de mascota" formControlName="type">
+          <ion-select-option value="Burro">Burro</ion-select-option>
+          <ion-select-option value="Caballo">Caballo</ion-select-option>
+          <ion-select-option value="Cabra">Cabra</ion-select-option>
+          <ion-select-option value="Cerdo">Cerdo</ion-select-option>
+          <ion-select-option value="Conejo">Conejo</ion-select-option>
+          <ion-select-option value="Erizo">Erizo</ion-select-option>
+          <ion-select-option value="Gallina">Gallina</ion-select-option>
+          <ion-select-option value="Gallo">Gallo</ion-select-option>
+          <ion-select-option value="Gato">Gato</ion-select-option>
+          <ion-select-option value="Hamster">Hamster</ion-select-option>
+          <ion-select-option value="Pajaro">Pajaro</ion-select-option>
+          <ion-select-option value="Perro">Perro</ion-select-option>
+          <ion-select-option value="Pez">Pez</ion-select-option>
+          <ion-select-option value="Serpiente">Serpiente</ion-select-option>
+          <ion-select-option value="Tortuga">Tortuga</ion-select-option>
+          <ion-select-option value="Toro">Toro</ion-select-option>
+          <ion-select-option value="Vaca">Vaca</ion-select-option>
+          <ion-select-option value="Yegua">Yegua</ion-select-option>
+        </ion-select>
+        <div *ngIf="editForm.controls['type'].errors && editForm.controls['type'].touched" class="error-msg">
+          <div [hidden]="!editForm.controls['type'].errors.required">Tipo de mascota requerido</div>
+        </div>
+      </div>
+      <div class="input-cnt">
+        <p for="genre">Género</p>
+        <ion-segment formControlName="genre">
+          <ion-segment-button value="masculine">
+            Masculino
+          </ion-segment-button>
+          <ion-segment-button value="femenine">
+            Femenino
+          </ion-segment-button>
+        </ion-segment>
+        <div *ngIf="editForm.controls['genre'].errors && editForm.controls['genre'].touched" class="error-msg">
+          <div [hidden]="!editForm.controls['genre'].errors.required">Género de la mascota requerido</div>
+        </div>
+      </div>
+      <div class="input-cnt ubication-cnt">
+        <label>Geolocalización</label>
+        <ion-toggle formControlName="ubicationChecked" [disabled]="!edit"></ion-toggle>
+      </div>
+      <div class="input-cnt">
+        <p for="contactInfo">Información de contacto</p>
+        <input type="text" placeholder="Forma de contacto" formControlName="contactInfo">
+        <div *ngIf="editForm.controls['contactInfo'].errors && editForm.controls['contactInfo'].touched"
+          class="error-msg">
+          <div [hidden]="!editForm.controls['contactInfo'].errors.required">Introduzca una manera de que establezcan
+            contacto con usted</div>
+        </div>
+      </div>
+      <div class="btn-cnt">
+        <button class="submit-btn" *ngIf="edit" type="submit" value="save">Guardar</button>
       </div>
     </div>
-    <div class="input-cnt">
-      <p for="age">Edad</p>
-      <input type="number" placeholder="Edad de la mascota" formControlName="age">
-      <div *ngIf="editForm.controls['age'].errors && editForm.controls['age'].touched"
-        class="error-msg">
-        <div [hidden]="!editForm.controls['age'].errors.required">Introduzca la edad de la mascota</div>
+    <div class="border-top-cnt">
+      <div class="post-cnts" *ngIf="dataLoaded && section == 'posts'">
+        <div class="post-cnt" *ngFor="let post of posts; trackBy: trackByFunction">
+          <div class="pet-data">
+            <img [src]="users[post.userId].profileImg || '../../../../assets/icon/foto-perfil.png'" alt="">
+            <p>{{users[post.userId].name}}</p>
+            <img src="../../../../assets/icon/trash.png" alt="" class="delete-btn" (click)="deletePost(post.id)">
+          </div>
+          <p class="post-text">{{post.text}}</p>
+          <img class="preview-img" [src]="post.image" *ngIf="post.image" alt="" (click)="goToPreviewImg(post.image)">
+
+          <div class="post-extra-data">
+            <div class="likes-cnt">
+              <img [src]="'../../../../assets/icon/filledHeart.png'" alt="">
+              <span>{{post.usersIdThatFavourited ? post.usersIdThatFavourited.length : '0'}}</span>
+            </div>
+            <span>{{isToday(post.createdDate) ? 'Hoy a las ' + ( post.createdDate | date: 'HH:mm') : ( post.createdDate | date: 'HH:mm - dd/MM/yyyy')}}</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="input-cnt">
-      <p for="type">Tipo de mascota</p>
-      <ion-select placeholder="Tipo de mascota" formControlName="type">
-        <ion-select-option value="Burro">Burro</ion-select-option>
-        <ion-select-option value="Caballo">Caballo</ion-select-option>
-        <ion-select-option value="Cabra">Cabra</ion-select-option>
-        <ion-select-option value="Cerdo">Cerdo</ion-select-option>
-        <ion-select-option value="Conejo">Conejo</ion-select-option>
-        <ion-select-option value="Erizo">Erizo</ion-select-option>
-        <ion-select-option value="Gallina">Gallina</ion-select-option>
-        <ion-select-option value="Gallo">Gallo</ion-select-option>
-        <ion-select-option value="Gato">Gato</ion-select-option>
-        <ion-select-option value="Hamster">Hamster</ion-select-option>
-        <ion-select-option value="Pajaro">Pajaro</ion-select-option>
-        <ion-select-option value="Perro">Perro</ion-select-option>
-        <ion-select-option value="Pez">Pez</ion-select-option>
-        <ion-select-option value="Serpiente">Serpiente</ion-select-option>
-        <ion-select-option value="Tortuga">Tortuga</ion-select-option>
-        <ion-select-option value="Toro">Toro</ion-select-option>
-        <ion-select-option value="Vaca">Vaca</ion-select-option>
-        <ion-select-option value="Yegua">Yegua</ion-select-option>
-      </ion-select>
-      <div *ngIf="editForm.controls['type'].errors && editForm.controls['type'].touched"
-        class="error-msg">
-        <div [hidden]="!editForm.controls['type'].errors.required">Tipo de mascota requerido</div>
-      </div>
-    </div>
-    <div class="input-cnt">
-      <p for="genre">Género</p>
-      <ion-segment formControlName="genre">
-        <ion-segment-button value="masculine">
-          Masculino
-        </ion-segment-button>
-        <ion-segment-button value="femenine">
-          Femenino
-        </ion-segment-button>
-      </ion-segment>
-      <div *ngIf="editForm.controls['genre'].errors && editForm.controls['genre'].touched"
-        class="error-msg">
-        <div [hidden]="!editForm.controls['genre'].errors.required">Género de la mascota requerido</div>
-      </div>
-    </div>
-    <div class="input-cnt">
-      <p for="contactInfo">Información de contacto</p>
-      <input type="text" placeholder="Forma de contacto" formControlName="contactInfo">
-      <div *ngIf="editForm.controls['contactInfo'].errors && editForm.controls['contactInfo'].touched"
-        class="error-msg">
-        <div [hidden]="!editForm.controls['contactInfo'].errors.required">Introduzca una manera de que establezcan contacto con usted</div>
-      </div>
-    </div>
-    <div class="btn-cnt">
-      <button class="submit-btn" *ngIf="edit" type="submit" value="save">Guardar</button>
     </div>
   </form>
-  </ion-content>
-  
+</ion-content>

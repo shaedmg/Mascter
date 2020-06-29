@@ -10,6 +10,7 @@
         <p>{{users[post.userId].name}}</p>
       </div>
       <p class="post-text">{{post.text}}</p>
+      <img class="preview-img" [src]="post.image" *ngIf="post.image" alt="" (click)="goToPreviewImg(post.image)">
       <div class="post-extra-data">
         <div class="likes-cnt">
           <img [src]="postIsFavourited(post) ? '../../../../assets/icon/filledHeart.png' : '../../../../assets/icon/emptyHeart.png'" alt="" (click)="toogleFavourite(post)">

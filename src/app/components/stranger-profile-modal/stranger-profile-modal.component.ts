@@ -1,3 +1,4 @@
+import { MessageProvider } from 'src/app/providers/message.provider';
 import { AngularFireDatabase } from "@angular/fire/database";
 import { ChatModel } from "./../../schemes/models/chat.model";
 import { PetProvider } from "./../../providers/pet.provider";
@@ -12,6 +13,7 @@ import {
 } from "@ionic/angular";
 import { take } from "rxjs/operators";
 import { ChatProvider } from "src/app/providers/chat.provider";
+import { PromiseType } from 'protractor/built/plugins';
 
 @Component({
   selector: "app-stranger-profile-modal",
@@ -32,7 +34,8 @@ export class StrangerProfileModalComponent implements OnInit {
     private petProvider: PetProvider,
     private alertController: AlertController,
     private db: AngularFireDatabase,
-    private chatProvider: ChatProvider
+    private chatProvider: ChatProvider,
+    private messageProvider: MessageProvider,
   ) {}
 
   async ngOnInit() {
@@ -133,6 +136,7 @@ export class StrangerProfileModalComponent implements OnInit {
                       return id !== this.pet.id;
                     })
                   : [];
+                  let chatId;
                 if (
                   this.chats[this.chats.length - 1].members.includes(
                     this.pet.id
@@ -141,8 +145,9 @@ export class StrangerProfileModalComponent implements OnInit {
                     this.currentPet.id
                   )
                 ) {
+                  chatId = this.chats[this.chats.length - 1].id;
                   await this.chatProvider.deleteChat(
-                    this.chats[this.chats.length - 1].id
+                    chatId
                   );
                   this.pet.chatsIds = this.pet.chatsIds.filter(
                     (r) => r !== this.chats[this.chats.length - 1].id
@@ -152,7 +157,7 @@ export class StrangerProfileModalComponent implements OnInit {
                   );
                   this.chats.pop();
                 } else {
-                  const chatId = this.chats.find((chat) => {
+                  chatId = this.chats.find((chat) => {
                     return (
                       chat.members.includes(this.currentPet.id) &&
                       chat.members.includes(this.pet.id)
@@ -167,6 +172,10 @@ export class StrangerProfileModalComponent implements OnInit {
                 }
                 await this.petProvider.updatePet(pet);
                 await this.petProvider.updatePet(this.currentPet);
+                this.messageProvider.getmessageByChatId(chatId).pipe(take(1)).toPromise().then(res => {
+                  const promisesArr = res.map(r => this.messageProvider.deleteMessage(r.id));
+                  Promise.all(promisesArr).then();
+                })
               },
             },
           ],

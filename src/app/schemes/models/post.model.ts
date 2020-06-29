@@ -5,6 +5,7 @@ export class PostModel{
     userId: string;
     createdDate?: number;
     usersIdThatFavourited: string[];
+    image?: string;
 
     constructor(db: AngularFireDatabase){
         this.id = db.createPushId();
