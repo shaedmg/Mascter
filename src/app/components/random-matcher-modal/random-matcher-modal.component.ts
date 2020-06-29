@@ -130,9 +130,9 @@ export class RandomMatcherModalComponent {
     await this.modalController.dismiss();
   }
   shufflePets(pets: PetModel[]): PetModel[] {
-    let i: number, randomNumber: number, aux: PetModel;
+    let randomNumber: number, aux: PetModel;
     let petsCopy: PetModel[] = JSON.parse(JSON.stringify(pets));
-    for (i = petsCopy.length - 1; i > 0; i--) {
+    for (let i = petsCopy.length - 1; i > 0; i--) {
         randomNumber = Math.floor(Math.random() * (i + 1));
         aux = petsCopy[i];
         petsCopy[i] = petsCopy[randomNumber];
