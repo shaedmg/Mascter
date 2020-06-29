@@ -210,6 +210,7 @@ ion-content {
       label{
         font-size: 15px;
         color: blue;
+        font-weight: bold;
       }
     }
     & > .input-cnt:last-child {
@@ -242,7 +243,8 @@ ion-content {
 
 ion-textarea{
   border: 1px solid orange;
-  --border-radius: 20px !important;
+  // --border-radius: 20px !important;
   border-radius: 10px;
   padding-left: 7px;
+  --placeholder-color: orange;
 }
