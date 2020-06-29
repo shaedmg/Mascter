@@ -66,8 +66,9 @@ export class CreatePostComponent implements OnInit {
   }
 
   async goToImgPreview(img: string){
-    let modal = await this.modalController.create({component: ImagePreviewComponent, componentProps: {image: img}});
-    return await modal.present();
+    await this.utilsService.goToImgPreview(img);
+    // let modal = await this.modalController.create({component: ImagePreviewComponent, componentProps: {image: img}});
+    // return await modal.present();
   }
 
 }

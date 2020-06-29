@@ -218,4 +218,8 @@ export class Tab3Page {
     
   }
 
+  async goToPreviewImg(image: string){
+    await this.utilsService.goToImgPreview(image);
+  }
+
 }

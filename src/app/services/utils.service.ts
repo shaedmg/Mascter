@@ -1,8 +1,9 @@
 import { CameraOptions, Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController, ActionSheetController } from '@ionic/angular';
+import { LoadingController, ToastController, ActionSheetController, ModalController } from '@ionic/angular';
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase';
+import { ImagePreviewComponent } from '../components/image-preview/image-preview.component';
 
 const { Camera } = Plugins;
 
@@ -18,6 +19,7 @@ export class UtilsService {
         private toastCtrl: ToastController,
         // private camera: Camera,
         private actionSheetController: ActionSheetController,
+        private modalController: ModalController,
     ) { }
 
     getArrayFromObject(object: any): any[] {
@@ -139,5 +141,10 @@ export class UtilsService {
 
       getDataFromNavigation(): any{
           return this.data;
+      }
+
+      async goToImgPreview(img: string){
+        let modal = await this.modalController.create({component: ImagePreviewComponent, componentProps: {image: img}});
+        return await modal.present();
       }
 }

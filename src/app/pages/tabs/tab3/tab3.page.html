@@ -109,6 +109,8 @@
             <img src="../../../../assets/icon/trash.png" alt="" class="delete-btn" (click)="deletePost(post.id)">
           </div>
           <p class="post-text">{{post.text}}</p>
+          <img class="preview-img" [src]="post.image" *ngIf="post.image" alt="" (click)="goToPreviewImg(post.image)">
+
           <div class="post-extra-data">
             <div class="likes-cnt">
               <img [src]="'../../../../assets/icon/filledHeart.png'" alt="">
