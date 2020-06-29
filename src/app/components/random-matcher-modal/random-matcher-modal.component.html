@@ -1,14 +1,22 @@
 <ion-content *ngIf="pet">
-  <div class="header">
-    <img src="../../../assets/icon/Backward arrow.svg" alt="" (click)="goBack()" class="back-btn">
-    <h1>{{pet.name}}</h1>
-    <img class="interested-btn" [src]="petIsFavourited() ? '../../../assets/icon/filledHeart.png' : '../../../assets/icon/emptyHeart.png'" alt="" (click)="toogleFavourite(pet)">
-
-  </div>
   <div class="photo-cnt">
-    <img [src]="pet.profileImg || '../../../assets/icon/foto-perfil.png'" alt="">
+    <div class="header">
+      <img src="../../../assets/icon/white-backward-arrow.png" alt="" (click)="goBack()" class="back-btn">
+    </div>
+    <img [src]="pet.profileImg || '../../../assets/icon/foto-perfil.png'" alt="" class="profile-img">
+    <div class="actions-cnt">
+      <div class="action-cnt">
+        <img class="interested-btn first-img" src="../../../assets/icon/broken-heart-filled.png" alt="" (click)="unfavourite()">
+      </div>
+      <div class="action-cnt">
+        <img class="interested-btn" src="../../../assets/icon/filledHeart.png" alt="" (click)="favourite()">
+      </div>
+    </div>
   </div>
   <div class="user-data">
+    <div class="data-cnt" *ngIf="pet.name">
+      <img src="../../../assets/icon/huella.png" alt=""> <label> Nombre: </label><span>{{pet.name}}</span>
+    </div>
     <div class="data-cnt" *ngIf="pet.genre">
       <img src="../../../assets/icon/huella.png" alt=""> <label> Género: </label><span>{{pet.genre == "femenine" ? 'Femenino' : 'Masculino'}}</span>
     </div>
@@ -22,9 +30,5 @@
       <img src="../../../assets/icon/huella.png" alt=""><label> Descripción: </label>
     </div>
     <p *ngIf="pet.description" class="contact-info-text">{{pet.description && pet.description}}</p>
-    <div class="data-cnt" *ngIf="pet.contactInfo">
-      <img src="../../../assets/icon/huella.png" alt=""><label> Información de contacto: </label>
-    </div>
-    <p *ngIf="pet.contactInfo" class="contact-info-text">{{pet.contactInfo && pet.contactInfo}}</p>
   </div>
 </ion-content>

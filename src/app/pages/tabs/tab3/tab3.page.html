@@ -83,6 +83,14 @@
           <div [hidden]="!editForm.controls['genre'].errors.required">Género de la mascota requerido</div>
         </div>
       </div>
+      <div class="input-cnt">
+        <p for="contactInfo">Descripción</p>
+        <input type="text" placeholder="Descripcion de la mascota" formControlName="description">
+        <div *ngIf="editForm.controls['description'].errors && editForm.controls['description'].touched"
+          class="error-msg">
+          <div [hidden]="!editForm.controls['description'].errors.required">Introduzca una descripción</div>
+        </div>
+      </div>
       <div class="input-cnt ubication-cnt">
         <label>Geolocalización</label>
         <ion-toggle formControlName="ubicationChecked" [disabled]="!edit"></ion-toggle>

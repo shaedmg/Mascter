@@ -1,3 +1,4 @@
+import { RandomMatcherModalComponent } from './../../../components/random-matcher-modal/random-matcher-modal.component';
 import { Plugins } from '@capacitor/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { OverlayEventDetail } from '@ionic/core';
@@ -97,5 +98,12 @@ export class Tab1Page {
 
   degreesToRad(deg): number {
     return deg * (Math.PI / 180)
+  }
+
+  async goToRandomMatcher(){
+    const modal = await this.modalController.create({
+      component: RandomMatcherModalComponent
+    });
+    await modal.present();
   }
 }

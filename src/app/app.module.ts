@@ -1,3 +1,4 @@
+import { RandomMatcherModalComponent } from './components/random-matcher-modal/random-matcher-modal.component';
 import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { StrangerProfileModalComponent } from './components/stranger-profile-modal/stranger-profile-modal.component';
@@ -27,7 +28,9 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, CreatePostComponent, StrangerProfileModalComponent, ChatComponent, ImagePreviewComponent],
+  declarations: [AppComponent, CreatePostComponent, 
+    StrangerProfileModalComponent, ChatComponent, 
+    ImagePreviewComponent, RandomMatcherModalComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

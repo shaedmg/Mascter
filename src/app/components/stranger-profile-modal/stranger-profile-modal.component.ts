@@ -20,7 +20,7 @@ import { PromiseType } from 'protractor/built/plugins';
   templateUrl: "./stranger-profile-modal.component.html",
   styleUrls: ["./stranger-profile-modal.component.scss"],
 })
-export class StrangerProfileModalComponent implements OnInit {
+export class StrangerProfileModalComponent {
   pet: PetModel;
   currentUserId: string;
   currentPet: PetModel;
@@ -38,7 +38,7 @@ export class StrangerProfileModalComponent implements OnInit {
     private messageProvider: MessageProvider,
   ) {}
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
     this.chats = await this.chatProvider.getAllData().pipe(take(1)).toPromise();
     this.currentUserId = await this.authService.getCurrentUserUid();
     this.currentPet = await this.petProvider
