@@ -87,6 +87,8 @@ ion-content {
           padding-left: 25px;
           justify-content: space-between;
           margin-top: 15px;
+          padding-right: 25px;
+          align-items: center;
           .likes-cnt {
             display: flex;
             img {
@@ -94,15 +96,22 @@ ion-content {
               margin-right: 6px;
             }
             span {
-              padding-right: 25px;
+              
               font-size: 13px;
               margin-top: 1px;
             }
           }
           span {
-            padding-right: 25px;
-            font-size: 13px;
+            font-size: 10px;
             margin-bottom: 10px;
+          }
+          .category-wrapper{
+            border: 1px solid orange;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px 10px 3px 10px;
           }
         }
       }

@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { StrangerProfileModalComponent } from 'src/app/components/stranger-profile-modal/stranger-profile-modal.component';
 import { Subscription } from 'rxjs';
+import { CategoriesModalComponent } from 'src/app/components/categories-modal/categories-modal.component';
 
 @Component({
   selector: 'app-tab2',
@@ -25,6 +26,8 @@ export class Tab2Page implements OnInit {
   dataLoaded: boolean = false;
   currentUserId: string;
   postSubscription: Subscription;
+  categoriesActiveFilters: string[] = [];
+  filteredPosts: PostModel[];
 
   constructor(private postProvider: PostProvider,
     private navController: NavController,
@@ -49,9 +52,11 @@ export class Tab2Page implements OnInit {
 
   async initPostAndUsersData(){
     this.dataLoaded = false;
+    this.categoriesActiveFilters = [];
     this.currentUserId = await this.authService.getCurrentUserUid()
     this.postSubscription = this.postProvider.getAllPosts().subscribe(res => {
       this.posts = res.reverse();
+      this.filterPostsByCategory();
       const users = [...new Set(this.posts.map(post => post.userId))];     
       const promisesArr = users.map(async user =>
         await this.petProvider.getDataById(user).pipe(take(1)).toPromise()
@@ -117,6 +122,28 @@ export class Tab2Page implements OnInit {
 
   async goToPreviewImg(image: string){
     await this.utilsService.goToImgPreview(image);
+  }
+
+  async openCategoriesModal(){
+    const modal = await this.modalController.create({
+      component: CategoriesModalComponent,
+      componentProps: { categoriesSelected: JSON.parse(JSON.stringify(this.categoriesActiveFilters)), multiSelection: true}
+    });
+    modal.onDidDismiss().then(res => {
+      if ( res ) {
+        this.categoriesActiveFilters = res.data;
+        this.filterPostsByCategory();
+      }
+    }) 
+    await modal.present();
+  }
+
+  filterPostsByCategory(){
+    if(this.categoriesActiveFilters.length === 0){
+      this.filteredPosts = JSON.parse(JSON.stringify(this.posts));
+    }else{
+      this.filteredPosts = this.posts.filter(post => (post.category && this.categoriesActiveFilters.includes(post.category)));
+    }
   }
   
 

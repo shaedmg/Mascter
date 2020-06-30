@@ -1,4 +1,5 @@
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Categories } from '../enums/categories';
 export class PostModel{
     id: string;
     text: string;
@@ -6,6 +7,7 @@ export class PostModel{
     createdDate?: number;
     usersIdThatFavourited: string[];
     image?: string;
+    category?: string;
 
     constructor(db: AngularFireDatabase){
         this.id = db.createPushId();

@@ -1,0 +1,16 @@
+<div class="header">
+  <span>Filtros</span>
+  <img src="../../../assets/icon/close-no-circle.png" alt="" (click)="dismissModal()">
+</div>
+<ion-content>
+  <div class="categories-cnts" *ngIf="categories">
+    <div class="category-cnt" [class.selected-div]="
+    ((!multiSelection && category == categorySelected) || 
+    (multiSelection && categoriesSelected.includes(category)))" 
+    *ngFor="let category of categories; let i = index" (click)="multiSelection ? toogleCategories(category) : selectCategory(category)">
+      <img [src]="categoriesImgs[i]" [class.expanded-img]="i == 2" alt="">
+      <span>{{category}}</span>
+    </div>
+  </div>
+  <!-- <img src="/src/assets/icon/cleaning.png" alt=""> -->
+</ion-content>

@@ -1,3 +1,4 @@
+import { CategoriesModalComponent } from './components/categories-modal/categories-modal.component';
 import { RandomMatcherModalComponent } from './components/random-matcher-modal/random-matcher-modal.component';
 import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 import { ChatComponent } from './components/chat/chat.component';
@@ -32,7 +33,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [AppComponent, CreatePostComponent, 
     StrangerProfileModalComponent, ChatComponent, 
     ImagePreviewComponent, RandomMatcherModalComponent,
-    UsersFiltersModalComponent],
+    UsersFiltersModalComponent, CategoriesModalComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
