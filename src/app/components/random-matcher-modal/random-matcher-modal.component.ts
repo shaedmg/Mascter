@@ -31,10 +31,12 @@ export class RandomMatcherModalComponent {
       private modalController: ModalController) { }
 
   async ionViewWillEnter() {
+    await this.utilsService.presentLoading();
     this.currentUserId = await this.authService.getCurrentUserUid();
     this.currentPet = await this.petProvider.getDataById(this.currentUserId).pipe(take(1)).toPromise();
     const pets = await this.petProvider.getAllData().pipe(take(1)).toPromise();
     this.petsToView = this.shufflePets(this.filterPetsToView(pets));
+    this.utilsService.dissmissLoading();
     this.goNextPet();
   }
 

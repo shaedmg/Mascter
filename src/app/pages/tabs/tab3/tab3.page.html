@@ -109,7 +109,7 @@
       </div>
     </div>
     <div class="border-top-cnt">
-      <div class="post-cnts" *ngIf="dataLoaded && section == 'posts'">
+      <div class="post-cnts" *ngIf="dataLoaded && section == 'posts' && posts.length > 0">
         <div class="post-cnt" *ngFor="let post of posts; trackBy: trackByFunction">
           <div class="pet-data">
             <img [src]="users[post.userId].profileImg || '../../../../assets/icon/foto-perfil.png'" alt="">
@@ -118,7 +118,7 @@
           </div>
           <p class="post-text">{{post.text}}</p>
           <img class="preview-img" [src]="post.image" *ngIf="post.image" alt="" (click)="goToPreviewImg(post.image)">
-
+          
           <div class="post-extra-data">
             <div class="likes-cnt">
               <img [src]="'../../../../assets/icon/filledHeart.png'" alt="">
