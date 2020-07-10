@@ -59,7 +59,7 @@ export class ChatsTabPage implements OnInit {
   }
   
   ionViewWillLeave(){
-    this.petSubscription.unsubscribe();
+    if ( this.petSubscription ) this.petSubscription.unsubscribe();
   }
 
   

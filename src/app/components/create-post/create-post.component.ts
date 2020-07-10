@@ -1,3 +1,4 @@
+import { CategoriesModalComponent } from './../categories-modal/categories-modal.component';
 import { ImagePreviewComponent } from './../image-preview/image-preview.component';
 import { Component, OnInit } from '@angular/core';
 import { PetModel } from 'src/app/schemes/models/pet.model';
@@ -69,6 +70,19 @@ export class CreatePostComponent implements OnInit {
     await this.utilsService.goToImgPreview(img);
     // let modal = await this.modalController.create({component: ImagePreviewComponent, componentProps: {image: img}});
     // return await modal.present();
+  }
+
+  async openCategoriesModal(){
+    const modal = await this.modalController.create({
+      component: CategoriesModalComponent,
+      componentProps: { categorySelected: this.post.category, multiSelection: false}
+    });
+    modal.onDidDismiss().then(res => {
+      if ( res ) {
+        this.post.category = res.data;
+      }
+    }) 
+    await modal.present();
   }
 
 }

@@ -13,6 +13,17 @@ ion-content {
       margin: 0;
     }
   }
+  .no-chats-msg {
+    padding-left: 37px;
+    padding-right: 37px;
+    p {
+      font-size: 12px;
+      color: sienna;
+      border: 1px solid sienna;
+      padding: 8px;
+      border-radius: 10px;
+    }
+  }
   .chats-list-cnt {
     padding: 0 37px;
     .chat-cnt {

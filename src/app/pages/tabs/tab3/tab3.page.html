@@ -83,6 +83,14 @@
           <div [hidden]="!editForm.controls['genre'].errors.required">Género de la mascota requerido</div>
         </div>
       </div>
+      <div class="input-cnt">
+        <p for="contactInfo">Descripción</p>
+        <ion-textarea type="text" placeholder="Descripcion de la mascota" formControlName="description"></ion-textarea>
+        <div *ngIf="editForm.controls['description'].errors && editForm.controls['description'].touched"
+          class="error-msg">
+          <div [hidden]="!editForm.controls['description'].errors.required">Introduzca una descripción</div>
+        </div>
+      </div>
       <div class="input-cnt ubication-cnt">
         <label>Geolocalización</label>
         <ion-toggle formControlName="ubicationChecked" [disabled]="!edit"></ion-toggle>
@@ -101,7 +109,7 @@
       </div>
     </div>
     <div class="border-top-cnt">
-      <div class="post-cnts" *ngIf="dataLoaded && section == 'posts'">
+      <div class="post-cnts" *ngIf="dataLoaded && section == 'posts' && posts.length > 0">
         <div class="post-cnt" *ngFor="let post of posts; trackBy: trackByFunction">
           <div class="pet-data">
             <img [src]="users[post.userId].profileImg || '../../../../assets/icon/foto-perfil.png'" alt="">
@@ -110,12 +118,13 @@
           </div>
           <p class="post-text">{{post.text}}</p>
           <img class="preview-img" [src]="post.image" *ngIf="post.image" alt="" (click)="goToPreviewImg(post.image)">
-
+          
           <div class="post-extra-data">
             <div class="likes-cnt">
               <img [src]="'../../../../assets/icon/filledHeart.png'" alt="">
               <span>{{post.usersIdThatFavourited ? post.usersIdThatFavourited.length : '0'}}</span>
             </div>
+            <span class="category-wrapper" *ngIf="post.category">{{post.category}}</span>
             <span>{{isToday(post.createdDate) ? 'Hoy a las ' + ( post.createdDate | date: 'HH:mm') : ( post.createdDate | date: 'HH:mm - dd/MM/yyyy')}}</span>
           </div>
         </div>

@@ -28,8 +28,8 @@
     display: flex;
     justify-content: center;
     img {
-        height: 100px;
-        width: 100px;
+        height: 180px;
+        width: 180px;
         border-radius: 50%;
         object-fit: fill;
     }
@@ -44,6 +44,7 @@
         margin-bottom: 15px;
         display: flex;
         align-items: center;
+        font-size: 14px;
         label{
             font-weight: bold;
             color: sienna;

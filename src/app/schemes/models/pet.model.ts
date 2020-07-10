@@ -12,8 +12,10 @@ export class PetModel{
     profileImg: string;
     usersIdThatAreInterested: string[];
     usersIdsInWhichIsInterested: string[];
+    petsViewed: string[];
     chatsIds: string[];
     ubication?: {latitude: number, longitude: number};
+    description: string;
 
     constructor(){
         this.id = '';

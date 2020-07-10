@@ -1,21 +1,25 @@
 <ion-content>
   <div class="header">
     <h1>Conoce otras mascotas</h1>
+    <img src="../../../../assets/icon/random.png" alt="" (click)="goToRandomMatcher()">
   </div>
-  <div class="search-cnt"></div>
-  <div class="post-cnts" *ngIf=" pet">
-    <div class="no-ubication-msg" *ngIf="!pet.ubication">
-      <p>Para acceder a la funcionalidad de conocer mascotas cercanas,
-         debe tener una ubicación registrada y la opción de Geolocalización en el perfil activada</p>
-    </div>
-    <div *ngIf="pet.ubication && pets">
-      <p *ngIf="pets.length == 0" class="no-pets-msg">No hay ninguna mascota cercana a su posición</p>
-      <div *ngFor="let pet of pets let index = index;trackBy: trackByFunction" class="pet-data animate__animated animate__bounceInUp" (click)="goToProfile(pet)"
-      [style.animation-delay]=" (0.3 * index) + 's'" >
+  <div class="filter-img-cnt">
+    <img src="../../../../assets/icon/filters.png" alt=""
+      (click)="pet && pet.ubication && filteredPets && goToFilters()">
+  </div>
+  <div class="no-ubication-msg" *ngIf="pet && !pet.ubication">
+    <p>Para acceder a la funcionalidad de conocer mascotas cercanas,
+      debe tener una ubicación registrada y la opción de Geolocalización en el perfil activada</p>
+  </div>
+  <p *ngIf="filteredPets && filteredPets.length == 0" class="no-pets-msg">No hay ninguna mascota cercana a su posición
+    que cumpla los requisitos</p>
+  <div class="post-cnts" *ngIf="pet && pet.ubication && filteredPets">
+    <div *ngFor="let pet of filteredPets let index = index;trackBy: trackByFunction"
+      class="pet-data animate__animated animate__bounceInUp" (click)="goToProfile(pet)"
+      [style.animation-delay]=" (0.3 * index) + 's'">
       <img src="../../../../assets/icon/huella.png" alt="" class="photo-bg-img">
       <img [src]="pet.profileImg || '../../../../assets/icon/foto-perfil.png' " class="profile-img" alt="">
       <p>{{pet.name}}</p>
     </div>
-  </div>
   </div>
 </ion-content>

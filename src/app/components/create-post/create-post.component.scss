@@ -88,3 +88,19 @@ ion-content {
     }
   }
 }
+.category-cnt{
+  display: flex;
+  align-items: center;
+  padding-left: 37px;
+  border-top: 1px solid sienna;
+  border-bottom: 1px solid sienna;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  span{
+    margin-right: 10px;
+  }
+  img{
+    height: 15px;
+    width: 15px;
+  }
+}

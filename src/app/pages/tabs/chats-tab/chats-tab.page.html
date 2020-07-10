@@ -2,6 +2,9 @@
   <div class="header">
     <h1>Chats</h1>
   </div>
+  <div class="no-chats-msg" *ngIf="chats && chats.length == 0">
+    <p>No tiene actualmente ningún match activo</p>
+  </div>
   <div class="chats-list-cnt" *ngIf="chats">
     <div class="chat-cnt" *ngFor="let chat of chats" (click)="goToChat(chat.id,
     pets[(chat.members[0] == currentUserId) ? chat.members[1] : chat.members[0]].profileImg,

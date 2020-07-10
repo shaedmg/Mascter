@@ -96,6 +96,14 @@
       </div>
     </div>
     <div class="input-cnt">
+      <p for="contactInfo">Descripción</p>
+      <ion-textarea type="text" placeholder="Descripcion de la mascota" formControlName="description"></ion-textarea>
+      <div *ngIf="registerForm.controls['description'].errors && registerForm.controls['description'].touched"
+        class="error-msg">
+        <div [hidden]="!registerForm.controls['description'].errors.required">Introduzca una descripción</div>
+      </div>
+    </div>
+    <div class="input-cnt">
       <p for="contactInfo">Forma de contacto</p>
       <input type="text" placeholder="Forma de contacto" formControlName="contactInfo">
       <div *ngIf="registerForm.controls['contactInfo'].errors && registerForm.controls['contactInfo'].touched"

@@ -78,3 +78,10 @@ ion-content {
         }
     }
 }
+ion-textarea{
+    border: 1px solid orange;
+    border-radius: 10px;
+    padding-left: 7px;
+    --placeholder-color: orange;
+    margin-bottom: 20px;
+}

@@ -48,7 +48,8 @@ export class RegisterPage implements OnInit {
       age: ['', [Validators.required]],
       type: ['', [Validators.required]],
       genre: ['', [Validators.required]],
-      contactInfo: ['', [Validators.required]]
+      contactInfo: ['', []],
+      description: ['']
     });
   }
 

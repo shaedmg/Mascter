@@ -1,0 +1,61 @@
+<div class="header">
+  <span>Filtros</span>
+  <img src="../../../assets/icon/close-no-circle.png" alt="" (click)="dismissModal()">
+</div>
+<ion-content>
+  <div class="filters-cnt">
+    <div class="filter-cnt">
+      <p>Edad</p>
+      <div class="age-cnts">
+        <div class="age-cnt">
+          <p>Min:</p>
+          <input type="number" [(ngModel)]="filters.age.min">
+        </div>
+        <div class="age-cnt">
+          <p>Max:</p>
+          <input type="number" [(ngModel)]="filters.age.max">
+        </div>
+      </div>
+    </div>
+    <div class="filter-cnt">
+      <p>Tipo de mascota</p>
+      <ion-select placeholder="Tipo de mascota" [(ngModel)]="filters.type">
+        <ion-select-option value="Burro">Burro</ion-select-option>
+        <ion-select-option value="Caballo">Caballo</ion-select-option>
+        <ion-select-option value="Cabra">Cabra</ion-select-option>
+        <ion-select-option value="Cerdo">Cerdo</ion-select-option>
+        <ion-select-option value="Conejo">Conejo</ion-select-option>
+        <ion-select-option value="Erizo">Erizo</ion-select-option>
+        <ion-select-option value="Gallina">Gallina</ion-select-option>
+        <ion-select-option value="Gallo">Gallo</ion-select-option>
+        <ion-select-option value="Gato">Gato</ion-select-option>
+        <ion-select-option value="Hamster">Hamster</ion-select-option>
+        <ion-select-option value="Pajaro">Pajaro</ion-select-option>
+        <ion-select-option value="Perro">Perro</ion-select-option>
+        <ion-select-option value="Pez">Pez</ion-select-option>
+        <ion-select-option value="Serpiente">Serpiente</ion-select-option>
+        <ion-select-option value="Tortuga">Tortuga</ion-select-option>
+        <ion-select-option value="Toro">Toro</ion-select-option>
+        <ion-select-option value="Vaca">Vaca</ion-select-option>
+        <ion-select-option value="Yegua">Yegua</ion-select-option>
+      </ion-select>
+      <button (click)="filters.type = ''">Limpiar</button>
+    </div>
+    <div class="filter-cnt">
+      <p>Género</p>
+      <ion-segment [(ngModel)]="filters.genre">
+        <ion-segment-button value="masculine">
+          Masculino
+        </ion-segment-button>
+        <ion-segment-button value="femenine">
+          Femenino
+        </ion-segment-button>
+      </ion-segment>
+      <button (click)="filters.genre = ''">Limpiar</button>
+    </div>
+  </div>
+  <div class="btns-cnt">
+    <div (click)="cleanAllFilters()">Limpiar</div>
+    <div (click)="applyFilters()">Aceptar</div>
+  </div>
+</ion-content>

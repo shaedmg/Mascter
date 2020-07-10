@@ -72,7 +72,8 @@ export class Tab3Page {
       type: [this.pet.type , [Validators.required]],
       genre: [this.pet.genre || '', [Validators.required]],
       contactInfo: [this.pet.contactInfo || '', [Validators.required]],
-      ubicationChecked: [!!this.pet.ubication]
+      ubicationChecked: [!!this.pet.ubication],
+      description: [this.pet.description || '']
     })
   }
 

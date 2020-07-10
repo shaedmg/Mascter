@@ -8,14 +8,14 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <div class="input-cnt">
-        <input type="email" placeholder="Email" formControlName="email">
+        <input type="email" placeholder="Correo" formControlName="email">
         <div *ngIf="loginForm.controls['email'].errors && !loginForm.controls['email'].pristine" class="error-msg">
-          <div [hidden]="!loginForm.controls['email'].errors.required">Email necesario</div>
-          <div class="error-msg" [hidden]="!loginForm.controls['email'].errors.email">El email introducido no es válido</div>
+          <div [hidden]="!loginForm.controls['email'].errors.required">Correo necesario</div>
+          <div class="error-msg" [hidden]="!loginForm.controls['email'].errors.email">El correo introducido no es válido</div>
         </div>
       </div>
       <div class="input-cnt">
-        <input type="password" placeholder="Password" formControlName="password">
+        <input type="password" placeholder="Contraseña" formControlName="password">
         <div *ngIf="loginForm.controls['password'].errors && !loginForm.controls['password'].pristine" class="error-msg">
           <div [hidden]="!loginForm.controls['password'].errors.required">Contraseña requerida</div>
         </div>

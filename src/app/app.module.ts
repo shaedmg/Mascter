@@ -1,3 +1,5 @@
+import { CategoriesModalComponent } from './components/categories-modal/categories-modal.component';
+import { RandomMatcherModalComponent } from './components/random-matcher-modal/random-matcher-modal.component';
 import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { StrangerProfileModalComponent } from './components/stranger-profile-modal/stranger-profile-modal.component';
@@ -21,13 +23,17 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { UsersFiltersModalComponent } from './components/users-filters-modal/users-filters-modal.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, CreatePostComponent, StrangerProfileModalComponent, ChatComponent, ImagePreviewComponent],
+  declarations: [AppComponent, CreatePostComponent, 
+    StrangerProfileModalComponent, ChatComponent, 
+    ImagePreviewComponent, RandomMatcherModalComponent,
+    UsersFiltersModalComponent, CategoriesModalComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
